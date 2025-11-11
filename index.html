@@ -88,15 +88,15 @@
       transform: rotate(-45deg) translate(6px, -6px);
     }
 
-    @media (max-width: 768px) {
-      nav:not(#mobile-nav) {
-        display: flex;
-      }
-    }
-
-    @media (min-width: 768px) {
-      mobile-nav {
-        display: none;
+  /* Hide desktop navbar on phones and small tablets */
+@media (max-width: 900px) {
+  nav {
+    display: none ;
+  }
+}
+    @media (min-width: 901px) {
+     nav {
+        display: flex
       }
     }
 
@@ -521,6 +521,7 @@
   </script>
 </body>
 </html>
+
 
 
 
