@@ -35,21 +35,23 @@
   width: 70%;
   height: 100%;
   background: rgba(0, 0, 0, 0.95);
-  transition: left 0.3s ease, opacity 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  z-index: 3000;
+  transition: left 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
+  z-index: 5000; /* ensures it stays above stars and all content */
 }
 
 .mobile-nav.active {
   left: 0;
   opacity: 1;
   visibility: visible;
+  transition-delay: 0s;
 }
+
 
 
     .mobile-nav a {
@@ -570,6 +572,7 @@ nav {
   </script>
 </body>
 </html>
+
 
 
 
