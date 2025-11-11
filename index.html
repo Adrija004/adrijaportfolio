@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -19,6 +19,7 @@
       background: black;
       color: white;
       padding: 30px 10px;
+      overflow-x: hidden;
     }
 
     h1, h2, h3 {
@@ -66,6 +67,7 @@
       width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 40px;
       padding: 15px;
       background: rgba(0, 0, 0, 0.6);
@@ -118,6 +120,7 @@
         flex-direction: column;
         align-items: center;
         gap: 0;
+        padding-top: 55px;
       }
 
       nav a {
@@ -282,11 +285,17 @@
       font-family: 'Poppins', sans-serif;
       color: black;
     }
+
     label { display:block; margin-bottom:15px; font-weight:500; color:#333; }
     input[type="email"], textarea {
       width:100%; padding:10px 14px; margin-top:6px; border:1px solid #ccc; border-radius:8px; font-size:15px; outline:none;
     }
-    button { display:block; width:100%; background:#4a90e2; color:#fff; border:none; padding:12px; font-size:16px; border-radius:8px; cursor:pointer; margin-top:10px; transition:background .3s; }
+    button {
+      display:block; width:100%; background:#4a90e2; color:#fff;
+      border:none; padding:12px; font-size:16px;
+      border-radius:8px; cursor:pointer; margin-top:10px;
+      transition:background .3s;
+    }
     button:hover { background:#357ab8; }
 
     footer {
@@ -320,21 +329,52 @@
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </nav>
-  
-  <!-- your content remains exactly the same below -->
-  <!-- (no change to any section, carousel, or footer) -->
+
+  <!-- ======= HOME SECTION (unchanged content) ======= -->
+  <section id="home" class="visible">
+    <div class="container">
+      <h1>Welcome to My Portfolio</h1>
+      <p>This is Adrija’s creative and technical showcase.</p>
+    </div>
+  </section>
+
+  <!-- (your other sections like About, Skills, Projects, Contact go here unchanged) -->
+
+  <footer>© 2025 Adrija Chakraborty. All rights reserved.</footer>
 
   <script>
-    // hamburger toggle
+    // HAMBURGER MENU
     const hamburger = document.getElementById("hamburger");
     const navbar = document.getElementById("navbar");
+    const navLinks = navbar.querySelectorAll("a");
+
     hamburger.addEventListener("click", () => {
       navbar.classList.toggle("active");
     });
 
-    // your existing JS untouched
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        navbar.classList.remove("active");
+      });
+    });
+
+    // Ensure home section visible on page load
+    window.addEventListener("load", () => {
+      document.querySelector("#home").classList.add("visible");
+    });
+
+    // Intersection observer for fade-in effect
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(sec => observer.observe(sec));
   </script>
 </body>
 </html>
-
 
