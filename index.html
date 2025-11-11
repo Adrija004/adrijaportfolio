@@ -91,14 +91,32 @@
   /* Hide desktop navbar on phones and small tablets */
 @media (max-width: 900px) {
   nav {
-    display: none ;
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  #mobileNav {
+    display: flex;
   }
 }
-    @media (min-width: 901px) {
-     nav {
-        display: flex
-      }
-    }
+
+  @media (min-width: 901px) {
+  nav {
+    display: flex !important;
+  }
+
+  #mobileNav {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: none !important;
+  }
+}
+
 
     /* ===== BACKGROUND ===== */
     #space {
@@ -521,6 +539,7 @@
   </script>
 </body>
 </html>
+
 
 
 
