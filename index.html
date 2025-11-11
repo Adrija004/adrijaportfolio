@@ -309,6 +309,26 @@ form { animation: fadeIn 0.6s ease-in-out; }
       .carousel-track { gap: 12px; }
     }
 
+      /* ========= INFINITE CAROUSEL ANIMATIONS ========= */
+.top-carousel .carousel-track {
+  animation: scrollLeftToRight 25s linear infinite;
+}
+
+.bottom-carousel .carousel-track {
+  animation: scrollRightToLeft 25s linear infinite;
+}
+
+@keyframes scrollLeftToRight {
+  0% { transform: translateX(-20%); }
+  100% { transform: translateX(20%); }
+}
+
+@keyframes scrollRightToLeft {
+  0% { transform: translateX(20%); }
+  100% { transform: translateX(-20%); }
+}
+
+
   </style>
 </head>
 <body>
@@ -529,6 +549,7 @@ form { animation: fadeIn 0.6s ease-in-out; }
 
 </body>
 </html>
+
 
 
 
