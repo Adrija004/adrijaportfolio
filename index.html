@@ -18,7 +18,7 @@
     body {
       background: black;
       color: white;
-      padding: 30px 10px;
+      overflow-x: hidden;
     }
 
     h1, h2, h3 {
@@ -72,13 +72,6 @@
       backdrop-filter: blur(6px);
       z-index: 100;
       animation: slideDown 1s ease-out;
-      overflow-x: auto; /* ✅ allows horizontal scrolling on mobile */
-      white-space: nowrap; /* ✅ keeps items in one line */
-      scrollbar-width: none; /* ✅ hides scrollbar (Firefox) */
-    }
-
-    nav::-webkit-scrollbar {
-      display: none; /* ✅ hides scrollbar (Chrome/Safari) */
     }
 
     nav a {
@@ -86,8 +79,6 @@
       color: white;
       font-size: 18px;
       transition: color 0.3s, transform 0.3s;
-      flex-shrink: 0; /* ✅ prevents text from squishing */
-      padding: 0 10px;
     }
 
     nav a:hover {
@@ -100,11 +91,298 @@
       100% { transform: translateY(0); opacity: 1; }
     }
 
+    /* ======= HAMBURGER MENU ======= */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 200;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 5px 10px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 20px;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+
+      nav.open {
+        max-height: 300px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
     /* ========= SECTIONS ========= */
     section {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center
+      text-align: center;
+      padding: 100px 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 25px #00e0ff;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00e0ff; }
+      to { text-shadow: 0 0 30px #00ffff; }
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      max-width: 700px;
+      padding: 0 15px;
+    }
+
+    /* ========= POLAROID CAROUSEL ========= */
+    .top-carousel, .bottom-carousel {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      touch-action: pan-y;
+      margin: 25px 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      width: max-content;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 8px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .polaroid img, .polaroid video {
+      width: 250px;
+      height: 250px;
+      object-fit: contain;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .top-carousel .carousel-track {
+      animation: scrollRight 40s linear infinite;
+    }
+
+    .bottom-carousel .carousel-track {
+      animation: scrollLeft 40s linear infinite;
+    }
+
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRight {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    .top-carousel:hover .carousel-track,
+    .bottom-carousel:hover .carousel-track {
+      animation-play-state: paused;
+    }
+
+    /* ========= SKILLS ========= */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .skill {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .skill:hover {
+      background: #00e0ff;
+      color: black;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #00e0ff;
+    }
+
+    /* ========= PROJECTS ========= */
+    .project {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 20px;
+      padding: 25px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 500px;
+      transition: 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px #00e0ff;
+    }
+
+    /* ========= CONTACT ========= */
+    form {
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 25px 30px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      font-family: 'Poppins', sans-serif;
+      color: black;
+    }
+    label { display:block; margin-bottom:15px; font-weight:500; color:#333; }
+    input[type="email"], textarea {
+      width:100%; padding:10px 14px; margin-top:6px; border:1px solid #ccc; border-radius:8px; font-size:15px; outline:none;
+    }
+    button { display:block; width:100%; background:#4a90e2; color:#fff; border:none; padding:12px; font-size:16px; border-radius:8px; cursor:pointer; margin-top:10px; transition:background .3s; }
+    button:hover { background:#357ab8; }
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+    }
+
+    /* ========= RESPONSIVE ========= */
+    @media (max-width: 768px) {
+      h1 { font-size: 1.4em; }
+      .polaroid img, .polaroid video { width: 150px; height: 150px; }
+    }
+
+    @media (max-width: 480px) {
+      .polaroid img, .polaroid video { width: 120px; height: 120px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="space"></div>
+
+  <button class="menu-toggle">☰</button>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- your existing sections remain same -->
+
+  <script>
+    // Star background
+    const space = document.getElementById("space");
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDuration = 2 + Math.random() * 3 + "s";
+      star.style.animationDelay = Math.random() * 5 + "s";
+      space.appendChild(star);
+    }
+
+    // Section reveal
+    const sections = document.querySelectorAll("section");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+      sections.forEach(sec => observer.observe(sec));
+    } else {
+      sections.forEach(sec => sec.classList.add("visible"));
+    }
+
+    // Touch/swipe carousel
+    document.querySelectorAll(".top-carousel, .bottom-carousel").forEach(container => {
+      const track = container.querySelector(".carousel-track");
+      let isDragging = false;
+      let startX;
+
+      container.addEventListener("touchstart", e => {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        track.style.animationPlayState = "paused";
+      });
+
+      container.addEventListener("touchmove", e => {
+        if (!isDragging) return;
+        const moveX = e.touches[0].clientX - startX;
+        track.style.transform = `translateX(${moveX}px)`;
+      });
+
+      container.addEventListener("touchend", () => {
+        isDragging = false;
+        track.style.transform = "";
+        track.style.animationPlayState = "running";
+      });
+    });
+
+    // Hamburger menu toggle + auto-close
+    const menuBtn = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+    const navLinks = nav.querySelectorAll("a");
+
+    menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
+    navLinks.forEach(link => link.addEventListener("click", () => nav.classList.remove("open")));
+  </script>
+</body>
+</html>
 
