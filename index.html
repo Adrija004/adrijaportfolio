@@ -27,11 +27,11 @@
       letter-spacing: 1px;
     }
 
-/* MOBILE NAV */
+/* Mobile nav */
 .mobile-nav {
   position: fixed;
   top: 0;
-  left: -70%;
+  left: -100%;
   width: 70%;
   height: 100%;
   background: rgba(0, 0, 0, 0.95);
@@ -39,36 +39,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: left 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
+  transition: left 0.3s ease;
   z-index: 5000;
 }
 
 .mobile-nav.active {
   left: 0;
-  opacity: 1;
-  visibility: visible;
-  transition-delay: 0s;
 }
 
-/* Remove all display: flex / display: none rules for #mobileNav inside media queries */
+.mobile-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3em;
+  margin: 20px 0;
+}
 
-    .mobile-nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.3em;
-      margin: 20px 0;
-    }
-
-    /* Hamburger button */
-/* Hamburger button */
+/* Hamburger */
 .hamburger {
   display: none;
   position: fixed;
   top: 18px;
   right: 20px;
-  z-index: 2000;
+  z-index: 6000;
   flex-direction: column;
   justify-content: space-between;
   width: 28px;
@@ -87,14 +79,10 @@
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
+.hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(6px, -6px);
 }
-
-
 
 /* Media queries */
 @media (max-width: 900px) {
@@ -106,45 +94,6 @@
   .hamburger { display: none; }
 }
 
-
-    /* fix: ensure mobile nav appears above all other layers */
-#mobileNav {
-  z-index: 3000 ;
-  visibility: hidden;
-  opacity: 0;
-}
-
-#mobileNav.active {
-  visibility: visible ;
-  opacity: 1 ;
-}
- @media (max-width: 900px) {
-  nav {
-    display: none !important;
-  }
-
-  .hamburger {
-    display: flex !important;
-  }
-
-  #mobileNav {
-    display: flex;
-  }
-}
-
-@media (min-width: 901px) {
-  nav {
-    display: flex !important;
-  }
-
-  #mobileNav {
-    display: none !important;
-  }
-
-  .hamburger {
-    display: none !important;
-  }
-}
 
 
     /* ===== NAVBAR ===== */
@@ -558,7 +507,7 @@
 
     // Hamburger + Mobile Nav Toggle
    const hamburger = document.getElementById("hamburger");
-const mobileNav = document.getElementById("mobileNav");
+const mobileNav = document.getElementById(".mobile-nav");
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
@@ -575,6 +524,7 @@ mobileNav.querySelectorAll("a").forEach(link => {
   </script>
 </body>
 </html>
+
 
 
 
