@@ -94,29 +94,7 @@
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Mobile Nav */
-.mobile-nav {
-  position: fixed;
-  top: 0;
-  left: -70%;
-  width: 70%;
-  height: 100%;
-  background: rgba(0,0,0,0.95);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: left 0.3s ease, opacity 0.3s ease;
-  z-index: 3000;
-}
 
-.mobile-nav.active {
-  left: 0;
-  opacity: 1;
-  visibility: visible;
-}
 
 /* Media queries */
 @media (max-width: 900px) {
@@ -125,8 +103,7 @@
 }
 
 @media (min-width: 901px) {
-  .mobile-nav { display: none !important; }
-  .hamburger { display: none !important; }
+  .hamburger { display: none; }
 }
 
 
@@ -605,6 +582,7 @@ mobileNav.querySelectorAll("a").forEach(link => {
   </script>
 </body>
 </html>
+
 
 
 
