@@ -1,340 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adrija's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adrija Chakraborty — Portfolio</title>
+
+  <!-- Fonts (optional, remote) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-      font-family: "Poppins", sans-serif;
+    :root{
+      --accent: #00e0ff;
+      --bg: #000;
+      --card-bg: #0b0b0b;
+      --card-shadow: rgba(0,224,255,0.18);
+      --polaroid-size: 240px; /* default size for desktop */
     }
 
-    body {
-      background: black;
-      color: white;
-      overflow-x: hidden;
+    /* ===== Reset & base ===== */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(ellipse at bottom, #0f1a24 0%, #000 100%);
+      color:#fff;
+      padding:28px 16px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
 
-    h1, h2, h3 {
-      font-family: "Playfair Display", "Poppins", serif;
-      font-weight: 700;
-      letter-spacing: 1px;
+    /* ===== Header ===== */
+    header{ text-align:center; margin-bottom:18px }
+    header h1{
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      letter-spacing:0.6px;
+      color:var(--accent);
+      text-shadow:0 0 18px rgba(0,224,255,0.12);
+      margin-bottom:6px;
+    }
+    header p{ opacity:0.9; font-size:0.95rem; margin-bottom:4px }
+
+    /* ===== Carousels wrapper ===== */
+    .carousel { width:100%; overflow:hidden; margin:26px 0; position:relative }
+    .carousel-track{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      /* animation is injected/controlled by JS per-track so no static animation here */
+      transform:translate3d(0,0,0);
+      will-change: transform;
     }
 
-    /* ========= STARRY BACKGROUND ========= */
-    #space {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      z-index: 0; /* was -1, now visible but behind content */
-      overflow: hidden;
+    /* Polaroid/card look */
+    .polaroid{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:8px;
+      box-shadow:0 6px 26px var(--card-shadow);
+      flex-shrink:0;
+      display:inline-block;
+      width:var(--polaroid-size);
+      height:var(--polaroid-size);
+      transition: transform .28s ease, box-shadow .28s ease;
+      cursor:default;
+      overflow:hidden;
+    }
+    .polaroid:hover{ transform:translateY(-6px) scale(1.03); box-shadow:0 12px 36px rgba(0,224,255,0.22) }
+
+    .polaroid img, .polaroid video{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      border-radius:8px;
+      background:linear-gradient(180deg,#071016,#091217);
+    }
+    .polaroid video{ display:block }
+
+    /* ===== Pause on hover ===== */
+    .carousel:hover .carousel-track,
+    .carousel-track:hover{
+      animation-play-state:paused !important;
     }
 
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 3s infinite ease-in-out, drift 20s linear infinite;
+    /* ===== Top vs Bottom animation keyframes (used via class) =====
+       We'll animate translateX from -50% -> 0 (top) and 0 -> -50% (bottom).
+       JS will set the animation-duration dynamically to match content width.
+    */
+    @keyframes scroll-right {
+      from{ transform: translateX(-50%); }
+      to  { transform: translateX(0%); }
+    }
+    @keyframes scroll-left {
+      from{ transform: translateX(0%); }
+      to  { transform: translateX(-50%); }
     }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
+    /* ===== Responsive tweaks ===== */
+    @media (max-width: 980px){
+      :root{ --polaroid-size: 200px }
+    }
+    @media (max-width: 640px){
+      :root{ --polaroid-size: 140px }
+      body{ padding:18px 10px }
+      header p{ font-size:0.9rem }
     }
 
-    @keyframes drift {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(50px); }
-    }
-
-    /* ========= NAVBAR ========= */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 15px;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(6px);
-      z-index: 10;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-size: 18px;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    nav a:hover {
-      color: #00e0ff;
-      transform: scale(1.1);
-    }
-
-    /* ======= HAMBURGER MENU ======= */
-    .menu-toggle {
-      display: none;
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      z-index: 20;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      border-radius: 8px;
-      padding: 5px 10px;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 20px;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-      }
-
-      nav.open {
-        max-height: 300px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-    }
-
-    /* ========= SECTIONS ========= */
-    section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 100px 0;
-      width: 100%;
-      position: relative;
-      z-index: 5; /* ensures visible above stars */
-      opacity: 1;
-      transform: none;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 0;
-    }
-
-    h1 {
-      font-size: 1.8em;
-      margin-bottom: 15px;
-      text-shadow: 0 0 25px #00e0ff;
-    }
-
-    p {
-      font-size: 1.2em;
-      line-height: 1.6em;
-      max-width: 700px;
-    }
-
-    /* ========= POLAROID CAROUSEL ========= */
-    .top-carousel, .bottom-carousel {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-      touch-action: pan-y;
-      margin: 25px 0;
-    }
-
-    .carousel-track {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-      width: max-content;
-    }
-
-    .polaroid {
-      background: white;
-      padding: 8px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .polaroid img, .polaroid video {
-      width: 250px;
-      height: 250px;
-      object-fit: contain;
-      border-radius: 6px;
-      display: block;
-    }
-
-    .top-carousel .carousel-track {
-      animation: scrollRight 40s linear infinite;
-    }
-
-    .bottom-carousel .carousel-track {
-      animation: scrollLeft 40s linear infinite;
-    }
-
-    @keyframes scrollLeft {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    @keyframes scrollRight {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
-    .top-carousel:hover .carousel-track,
-    .bottom-carousel:hover .carousel-track {
-      animation-play-state: paused;
-    }
-
-    /* ========= CONTACT ========= */
-    form {
-      max-width: 400px;
-      margin: 60px auto;
-      padding: 25px 30px;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      color: black;
-      z-index: 5;
-      position: relative;
-    }
-
-    input, textarea, button {
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background: #4a90e2;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #357ab8;
-    }
-
-    footer {
-      background: rgba(0, 0, 0, 0.7);
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
-      z-index: 5;
-      position: relative;
-    }
-
+    /* ===== Utility sections ===== */
+    section { padding: 18px 0 28px; max-width:1100px; margin:0 auto }
+    .center{ text-align:center }
+    .projects .project{ background:rgba(255,255,255,0.03); padding:16px; border-radius:10px; margin:12px auto; max-width:680px }
+    footer{ text-align:center; margin-top:26px; opacity:0.9; font-size:0.95rem }
   </style>
 </head>
 <body>
-  <div id="space"></div>
 
-  <button class="menu-toggle">☰</button>
+  <header>
+    <h1>Adrija Chakraborty</h1>
+    <p>Electronics & Communication • Embedded systems • Creative projects</p>
+  </header>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <section id="home">
-    <div class="container">
-      <h1>Welcome to My Portfolio</h1>
-      <p>This is the home section.</p>
+  <!-- TOP carousel (should move left → right visually) -->
+  <section class="carousel top-carousel" aria-label="Top photo carousel">
+    <div class="carousel-track">
+      <!-- Put your files (relative paths). JS will duplicate automatically for seamless scroll -->
+      <div class="polaroid"><img src="photo1.jpg" alt="photo 1"></div>
+      <div class="polaroid"><img src="photo2.jpg" alt="photo 2"></div>
+      <div class="polaroid"><img src="photo3.jpg" alt="photo 3"></div>
+      <div class="polaroid"><img src="photo4.jpg" alt="photo 4"></div>
+      <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="container">
-      <h1>About Me</h1>
-      <p>All about you here...</p>
+  <section class="center">
+    <h2 style="margin-bottom:6px;color:var(--accent);text-shadow:0 0 14px rgba(0,224,255,0.08);font-family:Playfair Display,serif">Hi — I'm Adrija 👋</h2>
+    <p style="max-width:760px;margin:0 auto 6px">I build embedded projects, PCBs and creative tech demos. Scrolling galleries above/below are animated for visual interest.</p>
+  </section>
+
+  <!-- BOTTOM carousel (should move right → left visually) -->
+  <section class="carousel bottom-carousel" aria-label="Bottom photo carousel">
+    <div class="carousel-track">
+      <div class="polaroid"><img src="photo5.jpg" alt="photo 5"></div>
+      <div class="polaroid"><img src="photo6.jpg" alt="photo 6"></div>
+      <div class="polaroid"><img src="photo7.jpg" alt="photo 7"></div>
+      <div class="polaroid"><video autoplay loop muted playsinline><source src="video2.mp4" type="video/mp4"></video></div>
+      <div class="polaroid"><img src="photo8.jpg" alt="photo 8"></div>
     </div>
   </section>
 
-  <section id="skills">
-    <div class="container">
-      <h1>Skills</h1>
-      <p>Your skills go here...</p>
+  <section class="projects">
+    <div class="project center">
+      <h3 style="margin-bottom:8px">Autonomous Bot</h3>
+      <p>Arduino Nano, 8-array IR sensors, TB66 motor driver, buck converter and custom 3D-printed chassis.</p>
     </div>
   </section>
 
-  <section id="projects">
-    <div class="container">
-      <h1>Projects</h1>
-      <p>Your project details...</p>
-    </div>
+  <section id="contact" class="center">
+    <h3>Contact</h3>
+    <p>📧 <a href="mailto:official.adrijac@gmail.com" style="color:var(--accent);text-decoration:none">official.adrijac@gmail.com</a></p>
+    <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">linkedin.com/in/adrija-chakraborty-0b186622a</a></p>
   </section>
 
-  <section id="contact">
-    <div class="container">
-      <h1>Contact Me</h1>
-      <form>
-        <label>Email:</label>
-        <input type="email" required>
-        <label>Message:</label>
-        <textarea rows="4" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  </section>
+  <footer>© 2025 Adrija Chakraborty</footer>
 
-  <footer>
-    © 2025 Adrija Chakraborty — All Rights Reserved
-  </footer>
-
+  <!-- ===== JavaScript: duplicate items & set animation dynamically ===== -->
   <script>
-    // Star background
-    const space = document.getElementById("space");
-    for (let i = 0; i < 150; i++) {
-      const star = document.createElement("div");
-      star.classList.add("star");
-      star.style.top = Math.random() * 100 + "%";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.animationDuration = 2 + Math.random() * 3 + "s";
-      star.style.animationDelay = Math.random() * 5 + "s";
-      space.appendChild(star);
-    }
+    (function(){
+      /**
+       * Seamless carousel helper
+       * - duplicates track children exactly once so track length = 2x content
+       * - applies CSS animation (scroll-left / scroll-right) and sets duration based on content width
+       * - pause on hover handled by CSS (animation-play-state)
+       *
+       * Requirements: Each .carousel-track should contain the original set of items once.
+       */
 
-    // Hamburger menu toggle + auto-close
-    const menuBtn = document.querySelector(".menu-toggle");
-    const nav = document.querySelector("nav");
-    const navLinks = nav.querySelectorAll("a");
+      const pxPerSecond = 60; // speed; increase => faster (pixels/sec)
 
-    menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
-    navLinks.forEach(link => link.addEventListener("click", () => nav.classList.remove("open")));
+      function setupTrack(trackEl, direction = 'left') {
+        // duplicate children
+        const children = Array.from(trackEl.children);
+        if (children.length === 0) return;
+
+        // Check whether already duplicated (avoid doubling on reload)
+        const isDuplicated = trackEl.dataset.duplicated === "true";
+        if (!isDuplicated) {
+          children.forEach(node => {
+            const clone = node.cloneNode(true);
+            trackEl.appendChild(clone);
+          });
+          trackEl.dataset.duplicated = "true";
+        }
+
+        // Force browser to compute sizes
+        requestAnimationFrame(() => {
+          // total width of track (both original + duplicate)
+          const totalW = trackEl.scrollWidth;
+          // width of single set (half)
+          const singleSetW = totalW / 2;
+
+          // compute duration: time = distance / speed
+          // distance we animate is singleSetW (we move -50% of full duplicated track)
+          const duration = Math.max(12, singleSetW / pxPerSecond); // min duration 12s for readability
+
+          // pick animation name based on desired visual direction:
+          // - direction 'right' = we want items to move visually left->right, so animate from -50% -> 0 (scroll-right keyframe)
+          // - direction 'left'  = items move right->left visually, so animate 0 -> -50% (scroll-left keyframe)
+          const animName = (direction === 'right') ? 'scroll-right' : 'scroll-left';
+
+          // set inline animation (so each track can have its own duration)
+          trackEl.style.animation = `${animName} ${duration}s linear infinite`;
+          trackEl.style.animationTimingFunction = 'linear';
+          // accessibility: reduce motion respects
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            trackEl.style.animation = 'none';
+          }
+        });
+      }
+
+      // Initialize for both carousels
+      document.addEventListener('DOMContentLoaded', () => {
+        const topTracks = document.querySelectorAll('.top-carousel .carousel-track');
+        topTracks.forEach(t => setupTrack(t, 'right'));  // top: visual left->right => use scroll-right
+
+        const bottomTracks = document.querySelectorAll('.bottom-carousel .carousel-track');
+        bottomTracks.forEach(t => setupTrack(t, 'left')); // bottom: visual right->left => use scroll-left
+
+        // Recalculate on resize (debounced)
+        let rTO;
+        window.addEventListener('resize', () => {
+          clearTimeout(rTO);
+          rTO = setTimeout(() => {
+            // remove previous animations so setup recalculates using new widths
+            document.querySelectorAll('.carousel-track').forEach(track => {
+              track.style.animation = 'none';
+              // remove duplication mark so we don't clone again; but we must ensure duplicates exist:
+              // If track has exact double children, remove duplicates and re-run setup
+              // Simpler: if children count > 1 and duplicated true, trim to first half then re-duplicate
+              if (track.dataset.duplicated === "true") {
+                const half = Math.floor(track.children.length / 2);
+                // remove children after half
+                while (track.children.length > half) track.removeChild(track.lastElementChild);
+                track.dataset.duplicated = "false";
+              }
+            });
+            // re-run setup
+            document.querySelectorAll('.top-carousel .carousel-track').forEach(t => setupTrack(t, 'right'));
+            document.querySelectorAll('.bottom-carousel .carousel-track').forEach(t => setupTrack(t, 'left'));
+          }, 180);
+        });
+      });
+    })();
   </script>
 </body>
 </html>
