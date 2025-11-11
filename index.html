@@ -521,9 +521,15 @@ form { animation: fadeIn 0.6s ease-in-out; }
 
   // ======== Seamless carousel initialization (left as before) ========
   // If you included the carousel script earlier, keep it; no change required here.
+      // Adjust carousel speed dynamically
+document.querySelectorAll(".carousel-track").forEach(track => {
+  track.style.animationDuration = "20s"; // set desired speed
+});
+
 </script>
 
 
 </body>
 </html>
+
 
