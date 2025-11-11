@@ -16,9 +16,9 @@
     }
 
     body {
+      font-family: "Poppins", Arial, sans-serif;
       background: black;
       color: white;
-      font-family: "Poppins", Arial, sans-serif;
     }
 
     h1, h2, h3 {
@@ -27,7 +27,45 @@
       letter-spacing: 1px;
     }
 
-    /* ===== MOBILE NAV ===== */
+    /* ========= HAMBURGER ========= */
+    .hamburger {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 30px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+    }
+
+    /* ========= MOBILE NAV ========= */
     .mobile-nav {
       position: fixed;
       top: 0;
@@ -59,286 +97,20 @@
         display: none;
       }
     }
-
-    /* ===== BACKGROUND ===== */
-    #space {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 3s infinite ease-in-out, drift 20s linear infinite;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    @keyframes drift {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(50px); }
-    }
-
-    /* ===== NAVBAR ===== */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 15px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(6px);
-      z-index: 100;
-      animation: slideDown 1s ease-out;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-size: 18px;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    nav a:hover {
-      color: #00e0ff;
-      transform: scale(1.1);
-    }
-
-    @keyframes slideDown {
-      0% { transform: translateY(-100px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    /* ===== SECTIONS ===== */
-    section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 100px 20px;
-      width: 100%;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 15px;
-      text-shadow: 0 0 25px #00e0ff;
-      animation: glow 3s infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00e0ff; }
-      to { text-shadow: 0 0 30px #00ffff; }
-    }
-
-    p {
-      font-size: 1.2em;
-      line-height: 1.6em;
-      max-width: 700px;
-    }
-
-    /* ===== CAROUSELS ===== */
-    .bottom-carousel,
-    .top-carousel {
-      overflow: hidden;
-      width: 100%;
-      margin: 25px auto;
-    }
-
-    .top-carousel .carousel-track {
-      animation: scrollRight 15s linear infinite;
-    }
-
-    .bottom-carousel .carousel-track {
-      animation: scrollLeft 15s linear infinite;
-    }
-
-    @keyframes scrollRight {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
-    @keyframes scrollLeft {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .carousel-track {
-      display: flex;
-      gap: 25px;
-      width: max-content;
-      align-items: center;
-      will-change: transform;
-      transform: translate3d(0,0,0);
-    }
-
-    .polaroid {
-      background: white;
-      padding: 8px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .polaroid img,
-    .polaroid video {
-      width: 250px;
-      height: 250px;
-      object-fit: contain;
-      border-radius: 6px;
-      display: block;
-      animation: floatPolaroid 3.2s ease-in-out infinite;
-    }
-
-    @keyframes floatPolaroid {
-      0% { transform: translateY(0px) rotate(-2deg); }
-      50% { transform: translateY(-6px) rotate(2deg); }
-      100% { transform: translateY(0px) rotate(-2deg); }
-    }
-
-    /* ===== SKILLS ===== */
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-    }
-
-    .skill {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 20px;
-      border-radius: 25px;
-      transition: 0.3s;
-    }
-
-    .skill:hover {
-      background: #00e0ff;
-      color: black;
-      transform: scale(1.1);
-      box-shadow: 0 0 15px #00e0ff;
-    }
-
-    /* ===== PROJECTS ===== */
-    .project {
-      background: rgba(255, 255, 255, 0.1);
-      margin: 20px;
-      padding: 25px;
-      border-radius: 15px;
-      width: 80%;
-      max-width: 500px;
-      transition: 0.3s;
-    }
-
-    .project:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 20px #00e0ff;
-    }
-
-    .project-link {
-      text-decoration: none;
-      color: #00e0ff;
-      transition: 0.3s;
-    }
-
-    .project-link:hover {
-      color: white;
-      text-shadow: 0 0 15px #00e0ff;
-    }
-
-    /* ===== FORM ===== */
-    form {
-      max-width: 400px;
-      margin: 60px auto;
-      padding: 25px 30px;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      font-family: 'Poppins', sans-serif;
-    }
-
-    label {
-      display:block;
-      margin-bottom:15px;
-      font-weight:500;
-      color:#333;
-    }
-
-    input[type="email"], textarea {
-      width:100%;
-      padding:10px 14px;
-      margin-top:6px;
-      border:1px solid #ccc;
-      border-radius:8px;
-      font-size:15px;
-      outline:none;
-    }
-
-    button {
-      display:block;
-      width:100%;
-      background:#4a90e2;
-      color:#fff;
-      border:none;
-      padding:12px;
-      font-size:16px;
-      border-radius:8px;
-      cursor:pointer;
-      margin-top:10px;
-      transition:background .3s;
-    }
-
-    button:hover { background:#357ab8; }
-
-    footer {
-      background: rgba(0, 0, 0, 0.7);
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
-    }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 2.2em; }
-      .polaroid img, .polaroid video { width: 180px; height: 180px; }
-      .skills-list { gap: 10px; }
-      .carousel-track { gap: 12px; }
-    }
   </style>
 </head>
 
 <body>
   <div id="space"></div>
 
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Your main nav (desktop) -->
   <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
@@ -347,81 +119,7 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <section id="home">
-    <div class="top-carousel">
-      <div class="carousel-track">
-        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
-        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
-        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
-        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
-        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
-      </div>
-    </div>
-
-    <h1>Hi, I'm Adrija 👋</h1>
-    <p>A passionate ECE student and creative mind exploring circuits, technology and innovation.</p>
-
-    <div class="bottom-carousel">
-      <div class="carousel-track">
-        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
-        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
-        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
-        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
-        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <h1>About Me</h1>
-      <p>I’m Adrija Chakraborty,pursuing Electronics and Communication Engineering final year from MSIT, Kolkata.  
-      I love blending electronics and creativity — from autonomous bots to PCB layouts and device simulation, 
-      every project teaches me something new and meaningful.</p>
-    </div>
-  </section>
-
-  <section id="skills">
-    <h1>Skills</h1>
-    <div class="skills-list">
-      <div class="skill">C</div>
-      <div class="skill">Python</div>
-      <div class="skill">Arduino</div>
-      <div class="skill">Tspice</div>
-      <div class="skill">Verilog</div>
-      <div class="skill">MATLAB</div>
-      <div class="skill">Silvaco</div>
-      <div class="skill">KiCad</div>
-      <div class="skill">HTML</div>
-      <div class="skill">CSS</div>
-      <div class="skill">JavaScript</div>
-      <div class="skill">MySQL</div>
-      <div class="skill">PHP</div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h1>Projects And Certifications</h1>
-    <div class="project">
-      <a href="autonomous-bot.html" class="project-link">
-        <h2>Autonomous Bot</h2>
-        <p>Built using Arduino Nano, IR sensors, TB66 motor driver and other required elements.</p>
-      </a>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h1>Contact</h1>
-    <p>📧 <a href="mailto:official.adrijac@gmail.com">official.adrijac@gmail.com</a></p>
-    <p>💼 <a href="www.linkedin.com/in/adrija-chakraborty-0b186622a">LinkedIn</a></p>
-
-    <form action="https://formspree.io/f/xovyqnod" method="POST">
-      <label>Your email: <input type="email" name="email"></label>
-      <label>Your message: <textarea name="message"></textarea></label>
-      <button type="submit">Send</button>
-    </form>
-  </section>
-
+  <!-- Mobile nav -->
   <nav id="mobileNav" class="mobile-nav">
     <a href="#home">Home</a>
     <a href="#about">About</a>
@@ -430,52 +128,50 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <footer>© 2025 Adrija Chakraborty | Made by Adrija with love 💙</footer>
-
   <script>
-    // Star background
-    const space = document.getElementById("space");
-    for (let i = 0; i < 200; i++) {
-      const star = document.createElement("div");
-      star.classList.add("star");
-      star.style.top = Math.random() * 100 + "%";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.animationDuration = 2 + Math.random() * 3 + "s";
-      star.style.animationDelay = Math.random() * 5 + "s";
-      space.appendChild(star);
-    }
+  const nav = document.getElementById("mobileNav");
+  const hamburger = document.getElementById("hamburger");
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-    // Reveal sections on scroll
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.1 });
+  // Toggle nav on hamburger click
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    hamburger.classList.toggle("active");
+  });
 
-    sections.forEach((sec) => observer.observe(sec));
-
-    // Swipe Navigation (mobile only)
-    document.addEventListener("DOMContentLoaded", () => {
-      const nav = document.getElementById("mobileNav");
-      let startX = 0;
-      let endX = 0;
-
-      document.body.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
-      });
-
-      document.body.addEventListener("touchmove", (e) => {
-        endX = e.touches[0].clientX;
-      });
-
-      document.body.addEventListener("touchend", () => {
-        if (window.innerWidth > 768) return;
-        const diff = endX - startX;
-        if (diff > 80) nav.classList.add("active");
-        else if (diff < -80) nav.classList.remove("active");
-      });
+  // Close nav when a link is clicked
+  document.querySelectorAll("#mobileNav a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("active");
+      hamburger.classList.remove("active");
     });
+  });
+
+  // Swipe open/close (only on mobile)
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    if (window.innerWidth > 768) return;
+
+    const diff = touchEndX - touchStartX;
+
+    if (diff > 70) {
+      nav.classList.add("active");
+      hamburger.classList.add("active");
+    } else if (diff < -70) {
+      nav.classList.remove("active");
+      hamburger.classList.remove("active");
+    }
+  }
   </script>
 </body>
 </html>
+
