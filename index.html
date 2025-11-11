@@ -49,6 +49,40 @@ form { animation: fadeIn 0.6s ease-in-out; }
       font-weight: 700;
       letter-spacing: 1px;
     }
+
+      .mobile-nav {
+  position: fixed;
+  top: 0;
+  left: -70%;
+  width: 70%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.mobile-nav.active {
+  left: 0;
+}
+
+.mobile-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3em;
+  margin: 20px 0;
+}
+
+/* Only show this nav on mobile */
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
     /* ========= STARRY BACKGROUND ========= */
     #space {
       position: fixed;
@@ -469,6 +503,14 @@ form { animation: fadeIn 0.6s ease-in-out; }
 </form>
   </section>
 
+        <nav id="mobileNav" class="mobile-nav">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
   <footer>© 2025 Adrija Chakraborty | Made by Adrija with love 💙</footer>
 
   <script>
@@ -552,6 +594,33 @@ document.querySelectorAll('.carousel-track').forEach(track => {
 
   // If you included the carousel script earlier, keep it; no change required here.
       // Adjust carousel speed dynamically
+const nav = document.getElementById("mobileNav");
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  // Only trigger on small screens
+  if (window.innerWidth > 768) return;
+
+  const diff = touchEndX - touchStartX;
+
+  if (diff > 70) {
+    // Swipe Right → Open Menu
+    nav.classList.add("active");
+  } else if (diff < -70) {
+    // Swipe Left → Close Menu
+    nav.classList.remove("active");
+  }
+}
 
 
 </script>
@@ -559,6 +628,7 @@ document.querySelectorAll('.carousel-track').forEach(track => {
 
 </body>
 </html>
+
 
 
 
