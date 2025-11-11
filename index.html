@@ -68,6 +68,19 @@
       cursor: pointer;
     }
 
+    /* Fix hamburger visibility */
+.hamburger {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+  z-index: 2000; /* higher than nav */
+}
+
+nav {
+  z-index: 1000; /* ensure nav stays below hamburger */
+}
+
+
     .hamburger span {
       height: 3px;
       width: 100%;
@@ -538,6 +551,7 @@
   </script>
 </body>
 </html>
+
 
 
 
