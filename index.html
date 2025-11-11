@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adrija's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -16,9 +16,10 @@
     }
 
     body {
-      font-family: "Poppins", Arial, sans-serif;
       background: black;
       color: white;
+      padding: 30px 10px;
+      overflow-x: hidden;
     }
 
     h1, h2, h3 {
@@ -27,75 +28,153 @@
       letter-spacing: 1px;
     }
 
+    /* ========= STARRY BACKGROUND ========= */
+    #space {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    /* ========= NAVBAR ========= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      animation: slideDown 1s ease-out;
+      transition: 0.4s ease;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      color: #00e0ff;
+      transform: scale(1.1);
+    }
+
+    @keyframes slideDown {
+      0% { transform: translateY(-100px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
     /* ========= HAMBURGER ========= */
     .hamburger {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      width: 30px;
-      height: 25px;
-      display: flex;
+      display: none;
       flex-direction: column;
-      justify-content: space-between;
+      position: absolute;
+      right: 20px;
+      top: 12px;
       cursor: pointer;
-      z-index: 1100;
+      z-index: 200;
     }
 
     .hamburger span {
-      display: block;
+      width: 25px;
       height: 3px;
       background: white;
+      margin: 4px 0;
       border-radius: 2px;
       transition: 0.3s;
     }
 
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
-    }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
+    /* ========= MOBILE NAV ========= */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding-top: 55px;
+        transform: translateX(100%);
+        position: fixed;
+        height: 100vh;
+        width: 60%;
+        top: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        transition: transform 0.4s ease-in-out;
+      }
 
-    @media (min-width: 768px) {
+      nav.active {
+        transform: translateX(0);
+      }
+
+      nav a {
+        display: block;
+        padding: 15px;
+        font-size: 20px;
+      }
+
       .hamburger {
-        display: none;
+        display: flex;
       }
     }
 
-    /* ========= MOBILE NAV ========= */
-    .mobile-nav {
-      position: fixed;
-      top: 0;
-      left: -70%;
-      width: 70%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
+    /* ========= SECTIONS ========= */
+    section {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: left 0.3s ease;
-      z-index: 1000;
+      text-align: center;
+      padding: 100px 20px;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
     }
 
-    .mobile-nav.active {
-      left: 0;
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .mobile-nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.3em;
-      margin: 20px 0;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    @media (min-width: 768px) {
-      .mobile-nav {
-        display: none;
-      }
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 25px #00e0ff;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00e0ff; }
+      to { text-shadow: 0 0 30px #00ffff; }
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      max-width: 700px;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
     }
   </style>
 </head>
@@ -103,15 +182,11 @@
 <body>
   <div id="space"></div>
 
-  <!-- Hamburger icon -->
   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
 
-  <!-- Your main nav (desktop) -->
-  <nav>
+  <nav id="navbar">
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
@@ -119,58 +194,45 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- Mobile nav -->
-  <nav id="mobileNav" class="mobile-nav">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <section id="home" class="visible">
+    <div class="container">
+      <h1>Welcome to My Portfolio</h1>
+      <p>This is Adrija’s creative and technical showcase.</p>
+    </div>
+  </section>
+
+  <footer>© 2025 Adrija Chakraborty. All rights reserved.</footer>
 
   <script>
-  const nav = document.getElementById("mobileNav");
-  const hamburger = document.getElementById("hamburger");
-  let touchStartX = 0;
-  let touchEndX = 0;
+    const hamburger = document.getElementById("hamburger");
+    const navbar = document.getElementById("navbar");
+    const links = navbar.querySelectorAll("a");
 
-  // Toggle nav on hamburger click
-  hamburger.addEventListener("click", () => {
-    nav.classList.toggle("active");
-    hamburger.classList.toggle("active");
-  });
-
-  // Close nav when a link is clicked
-  document.querySelectorAll("#mobileNav a").forEach(link => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("active");
-      hamburger.classList.remove("active");
+    // Toggle menu on tap
+    hamburger.addEventListener("click", () => {
+      navbar.classList.toggle("active");
     });
-  });
 
-  // Swipe open/close (only on mobile)
-  document.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
+    // Close after tapping any section link
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        navbar.classList.remove("active");
+      });
+    });
 
-  document.addEventListener("touchend", (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
+    // Fade-in sections
+    window.addEventListener("load", () => {
+      document.querySelector("#home").classList.add("visible");
+    });
 
-  function handleSwipe() {
-    if (window.innerWidth > 768) return;
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
 
-    const diff = touchEndX - touchStartX;
-
-    if (diff > 70) {
-      nav.classList.add("active");
-      hamburger.classList.add("active");
-    } else if (diff < -70) {
-      nav.classList.remove("active");
-      hamburger.classList.remove("active");
-    }
-  }
+    sections.forEach(s => observer.observe(s));
   </script>
 </body>
 </html>
