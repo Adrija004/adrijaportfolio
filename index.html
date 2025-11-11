@@ -18,8 +18,8 @@
     body {
       background: black;
       color: white;
-      padding: 30px 10px;
       overflow-x: hidden;
+      padding-top: 60px;
     }
 
     h1, h2, h3 {
@@ -100,7 +100,7 @@
       flex-direction: column;
       position: absolute;
       right: 20px;
-      top: 12px;
+      top: 15px;
       cursor: pointer;
       z-index: 200;
     }
@@ -114,18 +114,32 @@
       transition: 0.3s;
     }
 
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
     /* ========= MOBILE NAV ========= */
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
-        align-items: center;
         gap: 0;
-        padding-top: 55px;
+        align-items: flex-start;
+        padding: 15px 20px;
       }
 
       nav a {
         display: none;
-        padding: 10px;
+        width: 100%;
+        padding: 10px 0;
+        text-align: left;
       }
 
       nav.active a {
@@ -180,124 +194,6 @@
       max-width: 700px;
     }
 
-    /* ========= POLAROID CAROUSEL ========= */
-    .top-carousel, .bottom-carousel {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-      touch-action: pan-y;
-      margin: 25px auto;
-    }
-
-    .carousel-track {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-      width: max-content;
-    }
-
-    .polaroid {
-      background: white;
-      padding: 8px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .polaroid img, .polaroid video {
-      width: 250px;
-      height: 250px;
-      object-fit: contain;
-      border-radius: 6px;
-      display: block;
-    }
-
-    .top-carousel .carousel-track {
-      animation: scrollRight 40s linear infinite;
-    }
-
-    .bottom-carousel .carousel-track {
-      animation: scrollLeft 40s linear infinite;
-    }
-
-    @keyframes scrollLeft {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    @keyframes scrollRight {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
-    .top-carousel:hover .carousel-track,
-    .bottom-carousel:hover .carousel-track {
-      animation-play-state: paused;
-    }
-
-    /* ========= SKILLS ========= */
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-    }
-
-    .skill {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 20px;
-      border-radius: 25px;
-      transition: 0.3s;
-    }
-
-    .skill:hover {
-      background: #00e0ff;
-      color: black;
-      transform: scale(1.1);
-      box-shadow: 0 0 15px #00e0ff;
-    }
-
-    /* ========= PROJECTS ========= */
-    .project {
-      background: rgba(255, 255, 255, 0.1);
-      margin: 20px;
-      padding: 25px;
-      border-radius: 15px;
-      width: 80%;
-      max-width: 500px;
-      transition: 0.3s;
-    }
-
-    .project:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 20px #00e0ff;
-    }
-
-    /* ========= CONTACT ========= */
-    form {
-      max-width: 400px;
-      margin: 60px auto;
-      padding: 25px 30px;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      font-family: 'Poppins', sans-serif;
-      color: black;
-    }
-
-    label { display:block; margin-bottom:15px; font-weight:500; color:#333; }
-    input[type="email"], textarea {
-      width:100%; padding:10px 14px; margin-top:6px; border:1px solid #ccc; border-radius:8px; font-size:15px; outline:none;
-    }
-    button {
-      display:block; width:100%; background:#4a90e2; color:#fff;
-      border:none; padding:12px; font-size:16px;
-      border-radius:8px; cursor:pointer; margin-top:10px;
-      transition:background .3s;
-    }
-    button:hover { background:#357ab8; }
-
     footer {
       background: rgba(0, 0, 0, 0.7);
       text-align: center;
@@ -305,13 +201,8 @@
       font-size: 0.9em;
     }
 
-    @media (max-width: 768px) {
-      h1 { font-size: 1.4em; }
-      .polaroid img, .polaroid video { width: 150px; height: 150px; }
-    }
-
     @media (max-width: 480px) {
-      .polaroid img, .polaroid video { width: 120px; height: 120px; }
+      h1 { font-size: 1.4em; }
     }
   </style>
 </head>
@@ -330,46 +221,71 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- ======= HOME SECTION (unchanged content) ======= -->
   <section id="home" class="visible">
     <div class="container">
-      <h1>Welcome to My Portfolio</h1>
-      <p>This is Adrija’s creative and technical showcase.</p>
+      <h1>Hi, I'm Adrija 👋</h1>
+      <p>A passionate ECE student and creative mind exploring circuits, technology, and innovation.</p>
     </div>
   </section>
 
-  <!-- (your other sections like About, Skills, Projects, Contact go here unchanged) -->
+  <section id="about">
+    <div class="container">
+      <h1>About Me</h1>
+      <p>Hello! I'm Adrija Chakraborty, pursuing ECE from MSIT Kolkata. I love blending electronics and creativity — from autonomous bots to PCB layouts and device simulation, each project teaches me something new.</p>
+    </div>
+  </section>
 
-  <footer>© 2025 Adrija Chakraborty. All rights reserved.</footer>
+  <section id="skills">
+    <h1>Skills</h1>
+    <div class="container">
+      <p>C, Python, Arduino, TSpice, Verilog, MATLAB, KiCad, HTML, CSS, JS, MySQL, PHP</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h1>Projects</h1>
+      <p>Autonomous Bot | Adiabatic Circuits | AIR Training | Megatronix Member</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h1>Contact</h1>
+      <p>📧 <a href="mailto:official.adrijac@gmail.com" style="color:#00e0ff;">official.adrijac@gmail.com</a></p>
+      <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a" target="_blank" style="color:#00e0ff;">linkedin.com/in/adrija-chakraborty</a></p>
+    </div>
+  </section>
+
+  <footer>© 2025 Adrija Chakraborty | Made with 💙</footer>
 
   <script>
-    // HAMBURGER MENU
+    // STARS
+    const space = document.getElementById("space");
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDuration = 2 + Math.random() * 3 + "s";
+      star.style.animationDelay = Math.random() * 5 + "s";
+      space.appendChild(star);
+    }
+
+    // HAMBURGER
     const hamburger = document.getElementById("hamburger");
     const navbar = document.getElementById("navbar");
-    const navLinks = navbar.querySelectorAll("a");
 
     hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
       navbar.classList.toggle("active");
     });
 
-    navLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        navbar.classList.remove("active");
-      });
-    });
-
-    // Ensure home section visible on page load
-    window.addEventListener("load", () => {
-      document.querySelector("#home").classList.add("visible");
-    });
-
-    // Intersection observer for fade-in effect
+    // SECTION ANIMATION
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("visible");
       });
     }, { threshold: 0.2 });
 
