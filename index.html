@@ -1,258 +1,434 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Adrija Chakraborty — Portfolio</title>
-
-  <!-- Fonts (optional, remote) -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adrija's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --accent: #00e0ff;
-      --bg: #000;
-      --card-bg: #0b0b0b;
-      --card-shadow: rgba(0,224,255,0.18);
-      --polaroid-size: 240px; /* default size for desktop */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: "Poppins", sans-serif;
     }
 
-    /* ===== Reset & base ===== */
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(ellipse at bottom, #0f1a24 0%, #000 100%);
-      color:#fff;
-      padding:28px 16px;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
+    body {
+      background: black;
+      color: white;
+      overflow-x: hidden;
     }
 
-    /* ===== Header ===== */
-    header{ text-align:center; margin-bottom:18px }
-    header h1{
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      letter-spacing:0.6px;
-      color:var(--accent);
-      text-shadow:0 0 18px rgba(0,224,255,0.12);
-      margin-bottom:6px;
-    }
-    header p{ opacity:0.9; font-size:0.95rem; margin-bottom:4px }
-
-    /* ===== Carousels wrapper ===== */
-    .carousel { width:100%; overflow:hidden; margin:26px 0; position:relative }
-    .carousel-track{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      /* animation is injected/controlled by JS per-track so no static animation here */
-      transform:translate3d(0,0,0);
-      will-change: transform;
+    h1, h2, h3 {
+      font-family: "Playfair Display", "Poppins", serif;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
-    /* Polaroid/card look */
-    .polaroid{
-      background:var(--card-bg);
-      border-radius:12px;
-      padding:8px;
-      box-shadow:0 6px 26px var(--card-shadow);
-      flex-shrink:0;
-      display:inline-block;
-      width:var(--polaroid-size);
-      height:var(--polaroid-size);
-      transition: transform .28s ease, box-shadow .28s ease;
-      cursor:default;
-      overflow:hidden;
-    }
-    .polaroid:hover{ transform:translateY(-6px) scale(1.03); box-shadow:0 12px 36px rgba(0,224,255,0.22) }
-
-    .polaroid img, .polaroid video{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:cover;
-      border-radius:8px;
-      background:linear-gradient(180deg,#071016,#091217);
-    }
-    .polaroid video{ display:block }
-
-    /* ===== Pause on hover ===== */
-    .carousel:hover .carousel-track,
-    .carousel-track:hover{
-      animation-play-state:paused !important;
+    /* ========= STARRY BACKGROUND ========= */
+    #space {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      z-index: 0;
+      overflow: hidden;
     }
 
-    /* ===== Top vs Bottom animation keyframes (used via class) =====
-       We'll animate translateX from -50% -> 0 (top) and 0 -> -50% (bottom).
-       JS will set the animation-duration dynamically to match content width.
-    */
-    @keyframes scroll-right {
-      from{ transform: translateX(-50%); }
-      to  { transform: translateX(0%); }
-    }
-    @keyframes scroll-left {
-      from{ transform: translateX(0%); }
-      to  { transform: translateX(-50%); }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out, drift 20s linear infinite;
     }
 
-    /* ===== Responsive tweaks ===== */
-    @media (max-width: 980px){
-      :root{ --polaroid-size: 200px }
-    }
-    @media (max-width: 640px){
-      :root{ --polaroid-size: 140px }
-      body{ padding:18px 10px }
-      header p{ font-size:0.9rem }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
     }
 
-    /* ===== Utility sections ===== */
-    section { padding: 18px 0 28px; max-width:1100px; margin:0 auto }
-    .center{ text-align:center }
-    .projects .project{ background:rgba(255,255,255,0.03); padding:16px; border-radius:10px; margin:12px auto; max-width:680px }
-    footer{ text-align:center; margin-top:26px; opacity:0.9; font-size:0.95rem }
+    @keyframes drift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50px); }
+    }
+
+    /* ========= NAVBAR ========= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 10;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      color: #00e0ff;
+      transform: scale(1.1);
+    }
+
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 5px 10px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 20px;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+
+      nav.open {
+        max-height: 300px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* ========= SECTIONS ========= */
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 0;
+      width: 100%;
+      position: relative;
+      z-index: 5;
+      opacity: 1;
+      transform: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 25px #00e0ff;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      max-width: 700px;
+    }
+
+    /* ========= AUTO CAROUSEL ========= */
+    .top-carousel, .bottom-carousel {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin: 25px 0;
+      touch-action: pan-y;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      width: max-content;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 8px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .polaroid img, .polaroid video {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .top-carousel .carousel-track {
+      animation: scrollRight 40s linear infinite;
+    }
+
+    .bottom-carousel .carousel-track {
+      animation: scrollLeft 40s linear infinite;
+    }
+
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRight {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    .top-carousel:hover .carousel-track,
+    .bottom-carousel:hover .carousel-track {
+      animation-play-state: paused;
+    }
+
+    /* ========= SKILLS / PROJECTS ========= */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .skill {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .skill:hover {
+      background: #00e0ff;
+      color: black;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #00e0ff;
+    }
+
+    .project {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 20px;
+      padding: 25px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 500px;
+      transition: 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px #00e0ff;
+    }
+
+    .project-link {
+      color: #00e0ff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .project-link:hover {
+      color: white;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    /* ========= FORM ========= */
+    form {
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 25px 30px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      color: black;
+    }
+
+    label { display:block; margin-bottom:15px; font-weight:500; color:#333; }
+    input[type="email"], textarea {
+      width:100%; padding:10px 14px; margin-top:6px; border:1px solid #ccc; border-radius:8px; font-size:15px; outline:none;
+    }
+    textarea { min-height:120px; resize:vertical; }
+    button {
+      display:block; width:100%; background:#4a90e2; color:#fff; border:none;
+      padding:12px; font-size:16px; border-radius:8px; cursor:pointer; margin-top:10px; transition:background .3s;
+    }
+    button:hover { background:#357ab8; }
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      position: relative;
+      z-index: 5;
+    }
   </style>
 </head>
 <body>
+  <div id="space"></div>
 
-  <header>
-    <h1>Adrija Chakraborty</h1>
-    <p>Electronics & Communication • Embedded systems • Creative projects</p>
-  </header>
+  <button class="menu-toggle">☰</button>
 
-  <!-- TOP carousel (should move left → right visually) -->
-  <section class="carousel top-carousel" aria-label="Top photo carousel">
-    <div class="carousel-track">
-      <!-- Put your files (relative paths). JS will duplicate automatically for seamless scroll -->
-      <div class="polaroid"><img src="photo1.jpg" alt="photo 1"></div>
-      <div class="polaroid"><img src="photo2.jpg" alt="photo 2"></div>
-      <div class="polaroid"><img src="photo3.jpg" alt="photo 3"></div>
-      <div class="polaroid"><img src="photo4.jpg" alt="photo 4"></div>
-      <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home">
+    <!-- ✅ New mobile-optimized full-width carousels -->
+    <div class="top-carousel">
+      <div class="carousel-track">
+        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
+        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
+        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
+        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
+        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+
+    <h1>Hi, I'm Adrija 👋</h1>
+    <p>A passionate ECE student and creative mind exploring circuits, technology and innovation.</p>
+
+    <div class="bottom-carousel">
+      <div class="carousel-track">
+        <div class="polaroid"><img src="photo5.jpg" alt="photo5"></div>
+        <div class="polaroid"><img src="photo6.jpg" alt="photo6"></div>
+        <div class="polaroid"><img src="photo7.jpg" alt="photo7"></div>
+        <div class="polaroid"><img src="photo8.jpg" alt="photo8"></div>
+        <div class="polaroid"><video autoplay loop muted playsinline><source src="video2.mp4" type="video/mp4"></video></div>
+      </div>
     </div>
   </section>
 
-  <section class="center">
-    <h2 style="margin-bottom:6px;color:var(--accent);text-shadow:0 0 14px rgba(0,224,255,0.08);font-family:Playfair Display,serif">Hi — I'm Adrija 👋</h2>
-    <p style="max-width:760px;margin:0 auto 6px">I build embedded projects, PCBs and creative tech demos. Scrolling galleries above/below are animated for visual interest.</p>
-  </section>
-
-  <!-- BOTTOM carousel (should move right → left visually) -->
-  <section class="carousel bottom-carousel" aria-label="Bottom photo carousel">
-    <div class="carousel-track">
-      <div class="polaroid"><img src="photo5.jpg" alt="photo 5"></div>
-      <div class="polaroid"><img src="photo6.jpg" alt="photo 6"></div>
-      <div class="polaroid"><img src="photo7.jpg" alt="photo 7"></div>
-      <div class="polaroid"><video autoplay loop muted playsinline><source src="video2.mp4" type="video/mp4"></video></div>
-      <div class="polaroid"><img src="photo8.jpg" alt="photo 8"></div>
+  <!-- ✅ All other content stays same -->
+  <section id="about">
+    <div class="container">
+      <h1>About Me</h1>
+      <p>I’m pursuing Electronics and Communication Engineering final year from MSIT, Kolkata.  
+      I love blending electronics and creativity — from autonomous bots to PCB layouts and device simulation, 
+      every project teaches me something new and meaningful.
+      I've always been technically sound and have always had good communication capabilities. Wanna know more about me? 
+      Let's dive in what I know and love to do...</p>
     </div>
   </section>
 
-  <section class="projects">
-    <div class="project center">
-      <h3 style="margin-bottom:8px">Autonomous Bot</h3>
-      <p>Arduino Nano, 8-array IR sensors, TB66 motor driver, buck converter and custom 3D-printed chassis.</p>
+  <section id="skills">
+    <h1>Skills</h1>
+    <div class="skills-list">
+      <div class="skill">C</div>
+      <div class="skill">Python</div>
+      <div class="skill">Arduino</div>
+      <div class="skill">Tspice</div>
+      <div class="skill">Verilog</div>
+      <div class="skill">MATLAB</div>
+      <div class="skill">Silvaco</div>
+      <div class="skill">KiCad</div>
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">MySQL</div>
+      <div class="skill">PHP</div>
     </div>
   </section>
 
-  <section id="contact" class="center">
-    <h3>Contact</h3>
-    <p>📧 <a href="mailto:official.adrijac@gmail.com" style="color:var(--accent);text-decoration:none">official.adrijac@gmail.com</a></p>
-    <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">linkedin.com/in/adrija-chakraborty-0b186622a</a></p>
+  <section id="projects">
+    <h1>Projects And Certifications</h1>
+    <div class="project">
+        <a href="autonomous-bot.html" class="project-link">
+      <h2>Autonomous Bot</h2>
+      <p>Built using Arduino Nano, IR sensors, TB66 motor driver and other required elements.</p>
+      </a>
+    </div>
+    <div class="project">
+      <a href="AIR.html" class = "project-link">
+        <h2>AIR training</h2>
+        <p>Trainee at AIR</p>
+      </a>
+    </div>
+    <div class="project">
+      <a href="Megatronix.html" class = "project-link">
+        <h2>Megatronix member</h2>
+        <p>Organised Paridhi, the renowned inter-college tech fest of east zone as a Megatron, member of Megatronix — the official technical club of MSIT</p>
+      </a>
+    </div>
+    <div class="project">
+      <h2>Final year project and research work</h2>
+      <p>UNDER PROGRESS</p>
+      <p>1. Project and research work on Performances of adiabatic logic circuits in the presence of interface trapped charges</p>
+      <p>2. Continued research on Radio telegraph noise (RTN)</p>
+    </div>
   </section>
 
-  <footer>© 2025 Adrija Chakraborty</footer>
+  <section id="Hire">
+    <h1>Hire me? Download my resume.</h1>
+    <a href="AdrijaChakraborty_Resume.pdf" download class="resume-btn">Download Resume</a>
+  </section>
 
-  <!-- ===== JavaScript: duplicate items & set animation dynamically ===== -->
+  <section id="contact">
+    <h1>Contact</h1>
+    <p>📧 <a href="mailto:official.adrijac@gmail.com">official.adrijac@gmail.com</a></p>
+    <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a" target="_blank">www.linkedin.com/in/adrija-chakraborty-0b186622a</a></p>
+
+    <form action="https://formspree.io/f/xovyqnod" method="POST">
+      <label>Your email:<input type="email" name="email"></label>
+      <label>Your message:<textarea name="message"></textarea></label>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>© 2025 Adrija Chakraborty | Made by Adrija with love 💙</footer>
+
   <script>
-    (function(){
-      /**
-       * Seamless carousel helper
-       * - duplicates track children exactly once so track length = 2x content
-       * - applies CSS animation (scroll-left / scroll-right) and sets duration based on content width
-       * - pause on hover handled by CSS (animation-play-state)
-       *
-       * Requirements: Each .carousel-track should contain the original set of items once.
-       */
+    // Stars
+    const space = document.getElementById("space");
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDuration = 2 + Math.random() * 3 + "s";
+      star.style.animationDelay = Math.random() * 5 + "s";
+      space.appendChild(star);
+    }
 
-      const pxPerSecond = 60; // speed; increase => faster (pixels/sec)
+    // Hamburger menu toggle + auto close
+    const menuBtn = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+    const navLinks = nav.querySelectorAll("a");
 
-      function setupTrack(trackEl, direction = 'left') {
-        // duplicate children
-        const children = Array.from(trackEl.children);
-        if (children.length === 0) return;
-
-        // Check whether already duplicated (avoid doubling on reload)
-        const isDuplicated = trackEl.dataset.duplicated === "true";
-        if (!isDuplicated) {
-          children.forEach(node => {
-            const clone = node.cloneNode(true);
-            trackEl.appendChild(clone);
-          });
-          trackEl.dataset.duplicated = "true";
-        }
-
-        // Force browser to compute sizes
-        requestAnimationFrame(() => {
-          // total width of track (both original + duplicate)
-          const totalW = trackEl.scrollWidth;
-          // width of single set (half)
-          const singleSetW = totalW / 2;
-
-          // compute duration: time = distance / speed
-          // distance we animate is singleSetW (we move -50% of full duplicated track)
-          const duration = Math.max(12, singleSetW / pxPerSecond); // min duration 12s for readability
-
-          // pick animation name based on desired visual direction:
-          // - direction 'right' = we want items to move visually left->right, so animate from -50% -> 0 (scroll-right keyframe)
-          // - direction 'left'  = items move right->left visually, so animate 0 -> -50% (scroll-left keyframe)
-          const animName = (direction === 'right') ? 'scroll-right' : 'scroll-left';
-
-          // set inline animation (so each track can have its own duration)
-          trackEl.style.animation = `${animName} ${duration}s linear infinite`;
-          trackEl.style.animationTimingFunction = 'linear';
-          // accessibility: reduce motion respects
-          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            trackEl.style.animation = 'none';
-          }
-        });
-      }
-
-      // Initialize for both carousels
-      document.addEventListener('DOMContentLoaded', () => {
-        const topTracks = document.querySelectorAll('.top-carousel .carousel-track');
-        topTracks.forEach(t => setupTrack(t, 'right'));  // top: visual left->right => use scroll-right
-
-        const bottomTracks = document.querySelectorAll('.bottom-carousel .carousel-track');
-        bottomTracks.forEach(t => setupTrack(t, 'left')); // bottom: visual right->left => use scroll-left
-
-        // Recalculate on resize (debounced)
-        let rTO;
-        window.addEventListener('resize', () => {
-          clearTimeout(rTO);
-          rTO = setTimeout(() => {
-            // remove previous animations so setup recalculates using new widths
-            document.querySelectorAll('.carousel-track').forEach(track => {
-              track.style.animation = 'none';
-              // remove duplication mark so we don't clone again; but we must ensure duplicates exist:
-              // If track has exact double children, remove duplicates and re-run setup
-              // Simpler: if children count > 1 and duplicated true, trim to first half then re-duplicate
-              if (track.dataset.duplicated === "true") {
-                const half = Math.floor(track.children.length / 2);
-                // remove children after half
-                while (track.children.length > half) track.removeChild(track.lastElementChild);
-                track.dataset.duplicated = "false";
-              }
-            });
-            // re-run setup
-            document.querySelectorAll('.top-carousel .carousel-track').forEach(t => setupTrack(t, 'right'));
-            document.querySelectorAll('.bottom-carousel .carousel-track').forEach(t => setupTrack(t, 'left'));
-          }, 180);
-        });
-      });
-    })();
+    menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
+    navLinks.forEach(link => link.addEventListener("click", () => nav.classList.remove("open")));
   </script>
 </body>
 </html>
