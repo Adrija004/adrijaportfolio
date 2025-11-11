@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adrija's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    /* ========= BASIC SETUP ========= */
     * {
       margin: 0;
       padding: 0;
@@ -15,10 +17,31 @@
       font-family: "Poppins", sans-serif;
     }
 
+    /* General form styling */
+form {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 25px 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+label { display:block; margin-bottom:15px; font-weight:500; color:#333; }
+input[type="email"], textarea {
+  width:100%; padding:10px 14px; margin-top:6px; border:1px solid #ccc; border-radius:8px; font-size:15px; outline:none;
+}
+input[type="email"]:focus, textarea:focus { border-color:#4a90e2; box-shadow:0 0 6px rgba(74,144,226,0.3); }
+textarea { min-height:120px; resize:vertical; }
+button { display:block; width:100%; background:#4a90e2; color:#fff; border:none; padding:12px; font-size:16px; border-radius:8px; cursor:pointer; margin-top:10px; transition:background .3s; }
+button:hover { background:#357ab8; }
+form { animation: fadeIn 0.6s ease-in-out; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+
     body {
+      font-family: "Poppins", Arial, sans-serif;
       background: black;
       color: white;
-      overflow-x: hidden;
     }
 
     h1, h2, h3 {
@@ -26,7 +49,6 @@
       font-weight: 700;
       letter-spacing: 1px;
     }
-
     /* ========= STARRY BACKGROUND ========= */
     #space {
       position: fixed;
@@ -35,7 +57,7 @@
       width: 100%;
       height: 100%;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      z-index: 0;
+      z-index: -1;
       overflow: hidden;
     }
 
@@ -68,9 +90,10 @@
       justify-content: center;
       gap: 40px;
       padding: 15px;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(6px);
-      z-index: 10;
+      z-index: 100;
+      animation: slideDown 1s ease-out;
     }
 
     nav a {
@@ -85,42 +108,9 @@
       transform: scale(1.1);
     }
 
-    .menu-toggle {
-      display: none;
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      z-index: 20;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      border-radius: 8px;
-      padding: 5px 10px;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 20px;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-      }
-
-      nav.open {
-        max-height: 300px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
+    @keyframes slideDown {
+      0% { transform: translateY(-100px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
 
     /* ========= SECTIONS ========= */
@@ -130,12 +120,16 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 100px 0;
+      padding: 100px 20px;
       width: 100%;
-      position: relative;
-      z-index: 5;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
 
     .container {
@@ -145,9 +139,15 @@
     }
 
     h1 {
-      font-size: 2.5em;
+      font-size: 3em;
       margin-bottom: 15px;
       text-shadow: 0 0 25px #00e0ff;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00e0ff; }
+      to { text-shadow: 0 0 30px #00ffff; }
     }
 
     p {
@@ -156,20 +156,50 @@
       max-width: 700px;
     }
 
-    /* ========= AUTO CAROUSEL ========= */
-    .top-carousel, .bottom-carousel {
-      width: 100%;
+    /* ========= POLAROID CAROUSEL ========= */
+    /* keep visual layout similar to your original */
+    .bottom-carousel,
+    .top-carousel {
       overflow: hidden;
-      position: relative;
-      margin: 25px 0;
-      touch-action: pan-y;
+      width: 100%;
+      margin: 25px auto;
     }
 
+    /* NEW: the internal track that will be animated (we only added this rule) */
     .carousel-track {
       display: flex;
       gap: 25px;
+      width: max-content;          /* let track be as wide as it needs to be */
       align-items: center;
-      width: max-content;
+      will-change: transform;
+      transform: translate3d(0,0,0);
+    }
+
+    .project-link {
+      text-decoration: none;
+      color: #00e0ff;
+      transition: 0.3s;
+    }
+
+    .project-link:hover {
+      color: white;
+      text-shadow: 0 0 15px #00e0ff;
+    }
+
+    .resume-btn {
+      display: inline-block;
+      background-color: #4a90e2;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .resume-btn:hover {
+      background-color: #357ab8;
+      transform: translateY(-2px);
     }
 
     .polaroid {
@@ -178,40 +208,41 @@
       border-radius: 10px;
       flex-shrink: 0;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      /* keep a small float feel on the image itself */
     }
 
-    .polaroid img, .polaroid video {
-      width: 260px;
-      height: 260px;
-      object-fit: cover;
+    /* Make all items fill the same box and cover it so sizes are consistent */
+    .polaroid img,
+    .polaroid video {
+      width: 250px;
+      height: 250px;
+      object-fit: contain; /* changed to cover for consistent fill (prevents gaps/seams) */
       border-radius: 6px;
       display: block;
     }
 
-    .top-carousel .carousel-track {
-      animation: scrollRight 40s linear infinite;
+    /* small gentle float on the image/video only */
+    .polaroid img, .polaroid video { animation: floatPolaroid 3.2s ease-in-out infinite; }
+    @keyframes floatPolaroid {
+      0% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-6px) rotate(2deg); }
+      100% { transform: translateY(0px) rotate(-2deg); }
     }
 
-    .bottom-carousel .carousel-track {
-      animation: scrollLeft 40s linear infinite;
+    /* original moveCarousel & scroll rules left as-is won't be used for animation;
+       JS will inject precise animations for the tracks to avoid any jump. */
+
+    @keyframes moveCarousel {
+      0% { transform: translateX(-5%); }
+      100% { transform: translateX(5%); }
+    }
+    @keyframes scrollCarousel {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-10%); }
     }
 
-    @keyframes scrollLeft {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    @keyframes scrollRight {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
-    .top-carousel:hover .carousel-track,
-    .bottom-carousel:hover .carousel-track {
-      animation-play-state: paused;
-    }
-
-    /* ========= SKILLS / PROJECTS ========= */
+   
+    /* ========= SKILLS ========= */
     .skills-list {
       display: flex;
       flex-wrap: wrap;
@@ -234,6 +265,7 @@
       box-shadow: 0 0 15px #00e0ff;
     }
 
+    /* ========= PROJECTS ========= */
     .project {
       background: rgba(255, 255, 255, 0.1);
       margin: 20px;
@@ -249,53 +281,37 @@
       box-shadow: 0 0 20px #00e0ff;
     }
 
-    .project-link {
+    /* ========= CONTACT ========= */
+    #contact a {
       color: #00e0ff;
       text-decoration: none;
       transition: 0.3s;
     }
 
-    .project-link:hover {
+    #contact a:hover {
       color: white;
       text-shadow: 0 0 10px #00ffff;
     }
-
-    /* ========= FORM ========= */
-    form {
-      max-width: 400px;
-      margin: 60px auto;
-      padding: 25px 30px;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      color: black;
-    }
-
-    label { display:block; margin-bottom:15px; font-weight:500; color:#333; }
-    input[type="email"], textarea {
-      width:100%; padding:10px 14px; margin-top:6px; border:1px solid #ccc; border-radius:8px; font-size:15px; outline:none;
-    }
-    textarea { min-height:120px; resize:vertical; }
-    button {
-      display:block; width:100%; background:#4a90e2; color:#fff; border:none;
-      padding:12px; font-size:16px; border-radius:8px; cursor:pointer; margin-top:10px; transition:background .3s;
-    }
-    button:hover { background:#357ab8; }
 
     footer {
       background: rgba(0, 0, 0, 0.7);
       text-align: center;
       padding: 15px;
       font-size: 0.9em;
-      position: relative;
-      z-index: 5;
     }
+
+    /* ========= RESPONSIVE ========= */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2em; }
+      .polaroid img, .polaroid video { width: 180px; height: 180px; }
+      .skills-list { gap: 10px; }
+      .carousel-track { gap: 12px; }
+    }
+
   </style>
 </head>
 <body>
   <div id="space"></div>
-
-  <button class="menu-toggle">☰</button>
 
   <nav>
     <a href="#home">Home</a>
@@ -306,40 +322,48 @@
   </nav>
 
   <section id="home">
-    <!-- ✅ New mobile-optimized full-width carousels -->
+    <!-- Top carousel: only change here is wrapping items in .carousel-track -->
     <div class="top-carousel">
       <div class="carousel-track">
-        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
-        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
-        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
-        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
-        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo1.jpg" alt="photo1"></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo2.jpg" alt="photo2"></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo3.jpg" alt="photo3"></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo4.jpg" alt="photo4"></div>
+        <div class="polaroid">
+          <video autoplay loop muted playsinline>
+            <source src="C:\Users\adrij\OneDrive\Desktop\video\video1.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
 
     <h1>Hi, I'm Adrija 👋</h1>
     <p>A passionate ECE student and creative mind exploring circuits, technology and innovation.</p>
 
+    <!-- Bottom carousel: wrapped in .carousel-track too -->
     <div class="bottom-carousel">
       <div class="carousel-track">
-        <div class="polaroid"><img src="photo5.jpg" alt="photo5"></div>
-        <div class="polaroid"><img src="photo6.jpg" alt="photo6"></div>
-        <div class="polaroid"><img src="photo7.jpg" alt="photo7"></div>
-        <div class="polaroid"><img src="photo8.jpg" alt="photo8"></div>
-        <div class="polaroid"><video autoplay loop muted playsinline><source src="video2.mp4" type="video/mp4"></video></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo1.jpg" alt="photo1"></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo2.jpg" alt="photo2"></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo3.jpg" alt="photo3"></div>
+        <div class="polaroid"><img src="C:\Users\adrij\OneDrive\Desktop\photo\photo4.jpg" alt="photo4"></div>
+        <div class="polaroid">
+          <video autoplay loop muted playsinline>
+            <source src="C:\Users\adrij\OneDrive\Desktop\video\video1.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ✅ All other content stays same -->
   <section id="about">
     <div class="container">
       <h1>About Me</h1>
       <p>I’m pursuing Electronics and Communication Engineering final year from MSIT, Kolkata.  
       I love blending electronics and creativity — from autonomous bots to PCB layouts and device simulation, 
       every project teaches me something new and meaningful.
-      I've always been technically sound and have always had good communication capabilities. Wanna know more about me? 
-      Let's dive in what I know and love to do...</p>
+    I've  always been technically sound and have always had good communication capabilities. Wanna know more about me ? 
+    Let's dive in what I know and love to do...</p>
     </div>
   </section>
 
@@ -372,64 +396,134 @@
     </div>
     <div class="project">
       <a href="AIR.html" class = "project-link">
-        <h2>AIR training</h2>
+        <h2> AIR training</h2>
         <p>Trainee at AIR</p>
       </a>
     </div>
-    <div class="project">
+
+     <div class="project">
       <a href="Megatronix.html" class = "project-link">
-        <h2>Megatronix member</h2>
-        <p>Organised Paridhi, the renowned inter-college tech fest of east zone as a Megatron, member of Megatronix — the official technical club of MSIT</p>
+        <h2> Megatronix member</h2>
+        <p>Organised Paridhi,the renowned inter college tech fest of east zone as a megatron , member of Megatronix ,the official technical club of MSIT</p>
       </a>
     </div>
-    <div class="project">
-      <h2>Final year project and research work</h2>
-      <p>UNDER PROGRESS</p>
-      <p>1. Project and research work on Performances of adiabatic logic circuits in the presence of interface trapped charges</p>
-      <p>2. Continued research on Radio telegraph noise (RTN)</p>
+
+      <div class="project">
+        <h2> Final year project and research work</h2>
+        <p> UNDER  PROGRESS</p>
+        <p>1. Project and  research work on Performances of adiabatic logic circuits in the presence of interface trapped charges</p>
+        <p>2. Continued research on Radio telegraph noise (RTN)</p>
     </div>
   </section>
 
-  <section id="Hire">
-    <h1>Hire me? Download my resume.</h1>
-    <a href="AdrijaChakraborty_Resume.pdf" download class="resume-btn">Download Resume</a>
+  <section id ="Hire">
+    <h1> Hire me? Download my resume.</h1>
+    <a href="C:\Users\adrij\Downloads\AdrijaChakraborty_Resume (2).pdf" download class="resume-btn">
+  Download Resume
+</a>
   </section>
 
   <section id="contact">
     <h1>Contact</h1>
     <p>📧 <a href="mailto:official.adrijac@gmail.com">official.adrijac@gmail.com</a></p>
-    <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a" target="_blank">www.linkedin.com/in/adrija-chakraborty-0b186622a</a></p>
+    <p>💼 <a href="www.linkedin.com/in/adrija-chakraborty-0b186622a">www.linkedin.com/in/adrija-chakraborty-0b186622a</a></p>
 
-    <form action="https://formspree.io/f/xovyqnod" method="POST">
-      <label>Your email:<input type="email" name="email"></label>
-      <label>Your message:<textarea name="message"></textarea></label>
-      <button type="submit">Send</button>
-    </form>
+    <!-- modify this form HTML and place wherever you want your form -->
+<form
+  action="https://formspree.io/f/xovyqnod"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
   </section>
 
   <footer>© 2025 Adrija Chakraborty | Made by Adrija with love 💙</footer>
 
   <script>
-    // Stars
-    const space = document.getElementById("space");
-    for (let i = 0; i < 150; i++) {
-      const star = document.createElement("div");
-      star.classList.add("star");
-      star.style.top = Math.random() * 100 + "%";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.animationDuration = 2 + Math.random() * 3 + "s";
-      star.style.animationDelay = Math.random() * 5 + "s";
-      space.appendChild(star);
+  // ======== STAR CREATION ========
+  const space = document.getElementById("space");
+  for (let i = 0; i < 200; i++) {
+    const star = document.createElement("div");
+    star.classList.add("star");
+    star.style.top = Math.random() * 100 + "%";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.animationDuration = 2 + Math.random() * 3 + "s";
+    star.style.animationDelay = Math.random() * 5 + "s";
+    space.appendChild(star);
+  }
+
+  // ======== REVEAL SECTIONS ON SCROLL (IntersectionObserver) ========
+  (function () {
+    const sections = document.querySelectorAll("section");
+
+    // fast fallback: if IntersectionObserver not supported, reveal all on scroll+load
+    if (!("IntersectionObserver" in window)) {
+      const revealOnScrollFallback = () => {
+        const trigger = window.innerHeight / 1.2;
+        sections.forEach(sec => {
+          const top = sec.getBoundingClientRect().top;
+          if (top < trigger) sec.classList.add("visible");
+        });
+      };
+      window.addEventListener("scroll", revealOnScrollFallback);
+      window.addEventListener("resize", revealOnScrollFallback);
+      window.addEventListener("load", revealOnScrollFallback);
+      // run once now
+      revealOnScrollFallback();
+      return;
     }
 
-    // Hamburger menu toggle + auto close
-    const menuBtn = document.querySelector(".menu-toggle");
-    const nav = document.querySelector("nav");
-    const navLinks = nav.querySelectorAll("a");
+    // IntersectionObserver options — adjust rootMargin / threshold to tune when reveal happens
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px 0px -15% 0px", // reveal slightly before the section is fully inside view
+      threshold: 0
+    };
 
-    menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
-    navLinks.forEach(link => link.addEventListener("click", () => nav.classList.remove("open")));
-  </script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          // if you want one-time reveal only, unobserve:
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(sec => {
+      // If a section is already mostly inside viewport on load, reveal it immediately
+      const rect = sec.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        sec.classList.add("visible");
+      }
+      observer.observe(sec);
+    });
+
+    // also re-check on resize (useful if layout changes)
+    window.addEventListener("resize", () => {
+      sections.forEach(sec => {
+        if (!sec.classList.contains("visible")) {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.9) sec.classList.add("visible");
+        }
+      });
+    });
+  })();
+
+  // ======== Seamless carousel initialization (left as before) ========
+  // If you included the carousel script earlier, keep it; no change required here.
+</script>
+
+
 </body>
 </html>
 
