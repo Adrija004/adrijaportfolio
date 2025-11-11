@@ -147,37 +147,6 @@ nav {
 }
 
 
-    /* ===== BACKGROUND ===== */
-    #space {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 3s infinite ease-in-out, drift 20s linear infinite;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    @keyframes drift {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(50px); }
-    }
-
     /* ===== NAVBAR ===== */
     nav {
       position: fixed;
@@ -420,6 +389,39 @@ nav {
       .skills-list { gap: 10px; }
       .carousel-track { gap: 12px; }
     }
+
+    
+    /* ===== BACKGROUND ===== */
+    #space {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out, drift 20s linear infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes drift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50px); }
+    }
+
   </style>
 </head>
 
@@ -568,6 +570,7 @@ nav {
   </script>
 </body>
 </html>
+
 
 
 
