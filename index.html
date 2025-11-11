@@ -164,22 +164,15 @@
       object-fit: contain;
       border-radius: 6px;
       display: block;
-      animation: floatPolaroid 3.2s ease-in-out infinite;
-    }
-
-    @keyframes floatPolaroid {
-      0% { transform: translateY(0px) rotate(-2deg); }
-      50% { transform: translateY(-6px) rotate(2deg); }
-      100% { transform: translateY(0px) rotate(-2deg); }
     }
 
     /* ======== Infinite Scroll Animation ======== */
     .top-carousel .carousel-track {
-      animation: scrollRight 10s linear infinite;
+      animation: scrollRight 40s linear infinite;
     }
 
     .bottom-carousel .carousel-track {
-      animation: scrollLeft 10s linear infinite;
+      animation: scrollLeft 40s linear infinite;
     }
 
     @keyframes scrollLeft {
@@ -288,6 +281,14 @@
   <section id="home">
     <div class="top-carousel">
       <div class="carousel-track">
+        <!-- Set 1 -->
+        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
+        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
+        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
+        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
+        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+
+        <!-- Duplicate Set 2 -->
         <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
         <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
         <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
@@ -301,6 +302,14 @@
 
     <div class="bottom-carousel">
       <div class="carousel-track">
+        <!-- Set 1 -->
+        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
+        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
+        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
+        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
+        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+
+        <!-- Duplicate Set 2 -->
         <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
         <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
         <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
@@ -416,4 +425,3 @@
   </script>
 </body>
 </html>
-
