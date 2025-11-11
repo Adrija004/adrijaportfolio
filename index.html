@@ -27,7 +27,7 @@
       letter-spacing: 1px;
     }
 
-    /* ===== MOBILE NAV ===== */
+/* MOBILE NAV */
 .mobile-nav {
   position: fixed;
   top: 0;
@@ -42,7 +42,7 @@
   opacity: 0;
   visibility: hidden;
   transition: left 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
-  z-index: 5000; /* ensures it stays above stars and all content */
+  z-index: 5000;
 }
 
 .mobile-nav.active {
@@ -52,7 +52,7 @@
   transition-delay: 0s;
 }
 
-
+/* Remove all display: flex / display: none rules for #mobileNav inside media queries */
 
     .mobile-nav a {
       color: white;
@@ -572,6 +572,7 @@ nav {
   </script>
 </body>
 </html>
+
 
 
 
