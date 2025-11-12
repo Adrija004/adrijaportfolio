@@ -571,12 +571,20 @@
       body: JSON.stringify(data)
     });
 
-    if (response.ok) {
-      status.textContent = "✅ Message sent successfully!";
-      form.reset();
-    } else {
-      status.textContent = "❌ Error sending message. Try again.";
-    }
+   if (response.ok) {
+  status.textContent = "✅ Message sent successfully!";
+  status.style.color = "green";
+  form.reset();
+} else {
+  status.textContent = "❌ Error sending message. Try again.";
+  status.style.color = "red";
+}
+
+// Optional: clear message after 5 seconds
+setTimeout(() => {
+  status.textContent = "";
+}, 5000);
+
   });
 
     // Reveal sections on scroll
@@ -608,6 +616,7 @@ mobileNav.querySelectorAll("a").forEach(link => {
   </script>
 </body>
 </html>
+
 
 
 
