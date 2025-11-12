@@ -384,7 +384,8 @@
   <a href="#skills"><b>Skills</b></a>  
   <a href="#projects"><b>Projects</b></a>  
   <a href="#contact"><b>Contact</b></a>  
-</nav>    <section id="home">  
+</nav>   
+ <section id="home">  
     <div class="top-carousel">  
       <div class="carousel-track">  
         <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>  
@@ -393,8 +394,29 @@
         <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>  
         <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>  
       </div>  
+
+<div class="top-carousel">
+  <div class="carousel-track">
+    <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
+    <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
+    <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
+    <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
+    <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+  </div>
+</div>
+
     </div>  <h1>Hi, I'm Adrija 👋</h1>  
 <p>A passionate ECE student and creative mind exploring circuits, technology and innovation.</p>  
+
+<div class="bottom-carousel">  
+  <div class="carousel-track">  
+    <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>  
+    <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>  
+    <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>  
+    <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>  
+    <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>  
+  </div>  
+</div>
 
 <div class="bottom-carousel">  
   <div class="carousel-track">  
@@ -520,6 +542,11 @@ mobileNav.querySelectorAll("a").forEach(link => {
     mobileNav.classList.remove("active");  
   });  
 });  
+// Make both carousels continuous (fix width dynamically)
+document.querySelectorAll('.carousel-track').forEach(track => {
+  const totalWidth = Array.from(track.children).reduce((acc, el) => acc + el.offsetWidth + 25, 0);
+  track.style.width = totalWidth + 'px';
+});
   
   </script>  </body>  
 </html>
