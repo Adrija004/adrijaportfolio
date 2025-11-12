@@ -43,14 +43,21 @@
   display: none;
   margin-top: 10px;
   text-align: center;
-  color:black;
+  
 }
 
 .mobile-link a {
-  color: #00e0ff;
+  color: #ff69b4;
   text-decoration: none;
   font-weight: bold;
+  transition: 0.3s;
 }
+
+.mobile-link a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ff69b4;
+}
+
 
 @media (max-width: 768px) {
   .iframe-wrapper iframe {
@@ -60,6 +67,20 @@
   .mobile-link {
     display: block; /* show link instead */
   }
+}
+.resume-btn {
+  background: #00e0ff;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.resume-btn:hover {
+  background: white;
+  color: #00e0ff;
+  box-shadow: 0 0 15px #00e0ff;
 }
 
 
@@ -540,7 +561,8 @@
     <p class="mobile-link">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYmdIWxCVJKUe9ZJvi0ZCGh48KY0fJjGFAoIsNg4kcoesSKQ/viewform"
          target="_blank">
-         Open Form in New Tab
+         Fill this form !!! <br>
+        I will reach  out.
       </a>
     </p>
   </div>
