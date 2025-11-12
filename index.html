@@ -315,10 +315,8 @@
     background: #ffffff;
     border-radius: 16px;
 
-    /* Make the border thicker */
-    border: 5px solid #4a90e2; /* 5px is thick, change color as you like */
-    
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 5px solid #4a90e2; /* thick blue border */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* subtle shadow for depth */
     font-family: 'Poppins', sans-serif;
 }
 
@@ -332,16 +330,26 @@
       
     }
 
-    input[type="email"], textarea {
-      width:100%;
-      padding:10px 14px;
-      margin-top:6px;
-      border:1px solid #ccc;
-      border-radius:38px;
-      font-size:15px;
-border: 2px solid #4a90e2;
-      font-weight:700;
-    }
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border: 2px solid #4a90e2; /* border for inputs */
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    background: #111; /* dark background */
+    color: #fff; /* white text */
+    outline: none; /* remove default blue focus outline */
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border: 2px solid #00e0ff;
+    box-shadow: 0 0 10px #00e0ff;
+}
+
 
     button {
       display:block;
@@ -626,6 +634,7 @@ mobileNav.querySelectorAll("a").forEach(link => {
   </script>
 </body>
 </html>
+
 
 
 
