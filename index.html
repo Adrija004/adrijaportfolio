@@ -31,24 +31,22 @@
   border-radius: 16px;
   border: 3px solid #4a90e2;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  overflow: hidden;
 }
 
-.gform-container iframe {
+.iframe-wrapper {
+  position: relative;
+  padding-top: 160%; /* This ensures proportional height */
+}
+
+.iframe-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 850px;
+  height: 100%;
   border: none;
 }
 
-@media (max-width: 768px) {
-  .gform-container {
-    width: 95%;
-    padding: 15px;
-  }
-  .gform-container iframe {
-    height: 950px; /* increased height for mobile forms */
-  }
-}
 
     body {  
       background: black;  
@@ -513,9 +511,9 @@
   <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a" target="_blank">LinkedIn</a></p>
 
   <div class="gform-container">
+  <div class="iframe-wrapper">
     <iframe 
       src="https://docs.google.com/forms/d/e/1FAIpQLSeYmdIWxCVJKUe9ZJvi0ZCGh48KY0fJjGFAoIsNg4kcoesSKQ/viewform?embedded=true" 
-      style="width:100%; height:850px; border:none;" 
       frameborder="0" 
       marginheight="0" 
       marginwidth="0" 
@@ -523,6 +521,8 @@
       Loading…
     </iframe>
   </div>
+</div>
+
 </section>
  
     <nav id="mobileNav" class="mobile-nav">  
