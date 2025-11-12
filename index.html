@@ -517,19 +517,20 @@
     <h1>Contact</h1>
     <p>📧 <a href="mailto:official.adrijac@gmail.com">official.adrijac@gmail.com</a></p>
     <p>💼 <a href="www.linkedin.com/in/adrija-chakraborty-0b186622a">LinkedIn</a></p>
+<form id="contactForm">
+  <label>Name:</label>
+  <input name="name" required>
 
-    <form action="send_email.php" method="post">
-  <label>Name:</label><br>
-  <input type="text" name="name" required><br><br>
+  <label>Email:</label>
+  <input name="email" type="email" required>
 
-  <label>Email:</label><br>
-  <input type="email" name="email" required><br><br>
+  <label>Message:</label>
+  <textarea name="message" required></textarea>
 
-  <label>Message:</label><br>
-  <textarea name="message" rows="5" required></textarea><br><br>
-
-  <button type="submit">Send Message</button>
+  <button type="submit">Send</button>
 </form>
+
+<p id="formStatus"></p>
 
   </section>
 
@@ -555,6 +556,28 @@
       star.style.animationDelay = Math.random() * 5 + "s";
       space.appendChild(star);
     }
+
+ const form = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(form));
+
+    const response = await fetch("YOUR_SCRIPT_URL_HERE", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      status.textContent = "✅ Message sent successfully!";
+      form.reset();
+    } else {
+      status.textContent = "❌ Error sending message. Try again.";
+    }
+  });
 
     // Reveal sections on scroll
     const sections = document.querySelectorAll("section");
@@ -585,6 +608,7 @@ mobileNav.querySelectorAll("a").forEach(link => {
   </script>
 </body>
 </html>
+
 
 
 
