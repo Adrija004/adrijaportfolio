@@ -518,11 +518,19 @@
     <p>📧 <a href="mailto:official.adrijac@gmail.com">official.adrijac@gmail.com</a></p>
     <p>💼 <a href="www.linkedin.com/in/adrija-chakraborty-0b186622a">LinkedIn</a></p>
 
-    <form action="https://formspree.io/f/xovyqnod" method="POST">
-      <label>Your email: <input type="email" name="email"></label>
-      <label>Your message: <textarea name="message"></textarea></label>
-      <button type="submit">Send</button>
-    </form>
+    <form action="send_email.php" method="post">
+  <label>Name:</label><br>
+  <input type="text" name="name" required><br><br>
+
+  <label>Email:</label><br>
+  <input type="email" name="email" required><br><br>
+
+  <label>Message:</label><br>
+  <textarea name="message" rows="5" required></textarea><br><br>
+
+  <button type="submit">Send Message</button>
+</form>
+
   </section>
 
   <nav id="mobileNav" class="mobile-nav">
@@ -577,6 +585,7 @@ mobileNav.querySelectorAll("a").forEach(link => {
   </script>
 </body>
 </html>
+
 
 
 
