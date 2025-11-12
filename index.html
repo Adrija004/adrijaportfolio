@@ -370,6 +370,118 @@
       0% { transform: translateY(0); }  
       100% { transform: translateY(50px); }  
     }  
+/* ===== PHONE RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+
+  /* Overall layout */
+  body {
+    padding: 0 10px;
+    font-size: 0.95em;
+  }
+
+  section {
+    padding: 70px 15px;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 1.9em;
+    line-height: 1.3em;
+    text-shadow: 0 0 12px #00e0ff;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  /* Paragraphs */
+  p {
+    font-size: 1em;
+    line-height: 1.5em;
+  }
+
+  /* Carousel images/videos */
+  .polaroid img,
+  .polaroid video {
+    width: 150px;
+    height: 150px;
+  }
+
+  .carousel-track {
+    gap: 10px;
+  }
+
+  /* Skills section */
+  .skills-list {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .skill {
+    font-size: 0.9em;
+    padding: 8px 14px;
+  }
+
+  /* Projects */
+  .project {
+    width: 95%;
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  /* Resume section */
+  #Hire h1 {
+    font-size: 1.5em;
+  }
+
+  .resume-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 16px;
+    font-size: 1em;
+  }
+
+  /* Contact form (Google Form) */
+  .gform-container {
+    width: 90%;
+    padding: 15px;
+    margin: 40px auto;
+  }
+
+  .gform-container iframe {
+    height: 500px;
+  }
+
+  /* Navbar adjustments */
+  nav.desktop-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Ensure mobile nav covers full height */
+  .mobile-nav {
+    width: 100%;
+    left: -100%;
+  }
+
+  .mobile-nav.active {
+    left: 0;
+  }
+
+  .mobile-nav a {
+    font-size: 1.2em;
+    margin: 15px 0;
+  }
+
+  /* Footer */
+  footer {
+    font-size: 0.8em;
+    padding: 12px;
+  }
+}
   
   </style>  </head>  <body>  
   <div id="space"></div>    <!-- Hamburger icon -->    <!-- Hamburger icon -->  <div class="hamburger" id="hamburger">  
