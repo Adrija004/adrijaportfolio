@@ -47,7 +47,9 @@
     body {  
       background: black;  
       color: white;  
-      font-family: "Poppins", Arial, sans-serif;  
+      font-family: "Poppins", Arial, sans-serif; 
+      padding:0;
+      margin: 0;
     }  
   
      a:link { color: #f9f8ed; }       /* normal link */  
@@ -255,6 +257,18 @@
   flex-wrap: nowrap;     /* prevents wrapping to next line */
   white-space: nowrap;   /* keeps items in one line */
 }
+
+    /* Faster carousel on smaller screens */
+@media (max-width: 768px) {
+  .top-carousel .carousel-track {
+    animation: scrollRight 8s linear infinite; /* faster speed */
+  }
+
+  .bottom-carousel .carousel-track {
+    animation: scrollLeft 8s linear infinite;
+  }
+}
+
   
     .polaroid {  
       background: white;  
