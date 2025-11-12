@@ -565,7 +565,7 @@
 
     const data = Object.fromEntries(new FormData(form));
 
-    const response = await fetch("YOUR_SCRIPT_URL_HERE", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbwr5bv65JKnnRZlDv9ZNevDpiNOMdC1r9uQwPj5l754lin1a36ghpnedudoES6rD8U/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
@@ -608,6 +608,7 @@ mobileNav.querySelectorAll("a").forEach(link => {
   </script>
 </body>
 </html>
+
 
 
 
