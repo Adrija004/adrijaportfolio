@@ -42,16 +42,24 @@
 
 
 .mobile-link a {
-  color: #ff69b4;
+  color: #00e0ff; /* bright cyan-blue for visibility */
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
+  background: black; /* gives contrast */
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: inline-block;
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.7);
 }
 
 .mobile-link a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 10px #ff69b4;
+  color: black;
+  background: #00e0ff;
+  text-shadow: none;
+  box-shadow: 0 0 20px #00e0ff;
 }
+
 
     .mobile-link {
   display: none;
