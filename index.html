@@ -35,17 +35,32 @@
 
 .iframe-wrapper {
   position: relative;
-  padding-top: 160%; /* This ensures proportional height */
+  width: 100%;
+  height: auto;
 }
 
-.iframe-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
+.mobile-link {
+  display: none;
+  margin-top: 10px;
+  text-align: center;
 }
+
+.mobile-link a {
+  color: #00e0ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .iframe-wrapper iframe {
+    display: none; /* hide iframe on small screens */
+  }
+
+  .mobile-link {
+    display: block; /* show link instead */
+  }
+}
+
 
 
     body {  
@@ -511,20 +526,23 @@
   <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a" target="_blank">LinkedIn</a></p>
 
   <div class="gform-container">
-  <div class="iframe-wrapper">
-    <!-- Google Form Embed -->
-<div style="text-align:center;">
+<div class="iframe-wrapper">
   <iframe
     src="https://docs.google.com/forms/d/e/1FAIpQLSeYmdIWxCVJKUe9ZJvi0ZCGh48KY0fJjGFAoIsNg4kcoesSKQ/viewform?embedded=true"
-    width="100%"
-    height="800"
     frameborder="0"
-    marginheight="0"
-    marginwidth="0"
-    style="border:2px solid #00e0ff; border-radius:10px;"
+    style="width:100%; min-height:75vh; border:2px solid #00e0ff; border-radius:10px;"
     allowfullscreen>
-    Loading…
   </iframe>
+</div>
+
+<!-- Mobile fallback -->
+<p class="mobile-link">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYmdIWxCVJKUe9ZJvi0ZCGh48KY0fJjGFAoIsNg4kcoesSKQ/viewform"
+     target="_blank">
+     Open Form in New Tab
+  </a>
+</p>
+
 
   <!-- For mobile users -->
   <p style="text-align:center; margin-top:10px;">
