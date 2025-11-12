@@ -6,7 +6,7 @@
   <meta property="og:title" content="Adrija Chakraborty — Portfolio">
   <meta property="og:description" content="Engineer. Creator. Writer. Explore my latest projects and thoughts.">
   <meta property="og:url" content="https://adrija.pages.dev/">
-  <meta property="og:image" content="https://adrija.pages.dev/preview.jpg"> <!-- Optional but helpful -->
+  <meta property="og:image" content="https://adrija.pages.dev/preview.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.ico">
 
@@ -21,29 +21,26 @@
       font-family: "Poppins", sans-serif;
     }
 
-
     #gform-container iframe {
-  border: none;
-}
+      border: none;
+    }
 
-/* Container styling to look like your site form */
-.gform-container {
-  max-width: 600px;
-  margin: 60px auto;
-  padding: 30px;
-  background: #ffffff; /* white background */
-  border-radius: 16px;
-  border: 5px solid #4a90e2; /* blue border */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* subtle shadow */
-}
+    .gform-container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 16px;
+      border: 5px solid #4a90e2;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
 
-/* Optional: responsive */
-@media (max-width: 768px) {
-  .gform-container {
-    width: 90%;
-    padding: 20px;
-  }
-}
+    @media (max-width: 768px) {
+      .gform-container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
 
     body {
       background: black;
@@ -51,12 +48,12 @@
       font-family: "Poppins", Arial, sans-serif;
     }
 
-     a:link { color: #f9f8ed; }       /* normal link */
-  a:visited { color: #ddc2ae; }  /* visited link */
-  a:hover { color: #accce3; }       /* when mouse hovers */
-  a:active { color: green; }    /* while clicking */
+    a:link { color: #f9f8ed; }
+    a:visited { color: #ddc2ae; }
+    a:hover { color: #accce3; }
+    a:active { color: green; }
 
-    a{
+    a {
       font-weight: bold;
     }
 
@@ -66,85 +63,78 @@
       letter-spacing: 1px;
     }
 
-/* Mobile nav */
-.mobile-nav {
-  position: fixed;
-  top: 0;
-  left: -70%;
-  width: 70%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: left 0.3s ease;
-  z-index: 10000; /* make sure it’s above everything */
-}
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: -70%;
+      width: 70%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: left 0.3s ease;
+      z-index: 10000;
+    }
 
-.mobile-nav.active {
-  left: 0;
-}
+    .mobile-nav.active {
+      left: 0;
+    }
 
-.mobile-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.3em;
-  margin: 20px 0;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.3s, transform 0.3s;
-}
+    .mobile-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.3em;
+      margin: 20px 0;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
 
-.mobile-nav.active a {
-  opacity: 1;
-  transform: translateX(0);
-}
+    .mobile-nav.active a {
+      opacity: 1;
+      transform: translateX(0);
+    }
 
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      z-index: 6000;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+    }
 
-/* Hamburger */
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 18px;
-  right: 20px;
-  z-index: 6000;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  cursor: pointer;
-}
+    .hamburger span {
+      height: 3px;
+      width: 100%;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
 
-.hamburger span {
-  height: 3px;
-  width: 100%;
-  background: white;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
 
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
+    @media (max-width: 900px) {
+      .desktop-nav { display: none; }
+      .hamburger { display: flex; }
+    }
 
-/* Media queries */
-@media (max-width: 900px) {
-  .desktop-nav { display: none; }
-  .hamburger { display: flex; }
-}
+    @media (min-width: 901px) {
+      .hamburger { display: none; }
+    }
 
-@media (min-width: 901px) {
-  .hamburger { display: none; }
-}
-
-
-
-    /* ===== NAVBAR ===== */
     nav {
       position: fixed;
       top: 0;
@@ -177,7 +167,6 @@
       100% { transform: translateY(0); opacity: 1; }
     }
 
-    /* ===== SECTIONS ===== */
     section {
       display: flex;
       flex-direction: column;
@@ -220,7 +209,6 @@
       max-width: 700px;
     }
 
-    /* ===== CAROUSELS ===== */
     .bottom-carousel,
     .top-carousel {
       overflow: hidden;
@@ -228,22 +216,15 @@
       margin: 25px auto;
     }
 
-    .top-carousel .carousel-track {
-      animation: scrollRight 15s linear infinite;
-    }
-
-    .bottom-carousel .carousel-track {
-      animation: scrollLeft 15s linear infinite;
+    /* FIXED SMOOTH CAROUSEL */
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
     @keyframes scrollRight {
       from { transform: translateX(-50%); }
       to { transform: translateX(0); }
-    }
-
-    @keyframes scrollLeft {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
     }
 
     .carousel-track {
@@ -253,6 +234,14 @@
       align-items: center;
       will-change: transform;
       transform: translate3d(0,0,0);
+    }
+
+    .top-carousel .carousel-track {
+      animation: scrollRight 25s linear infinite;
+    }
+
+    .bottom-carousel .carousel-track {
+      animation: scrollLeft 25s linear infinite;
     }
 
     .polaroid {
@@ -279,7 +268,6 @@
       100% { transform: translateY(0px) rotate(-2deg); }
     }
 
-    /* ===== SKILLS ===== */
     .skills-list {
       display: flex;
       flex-wrap: wrap;
@@ -302,7 +290,6 @@
       box-shadow: 0 0 15px #00e0ff;
     }
 
-    /* ===== PROJECTS ===== */
     .project {
       background: rgba(255, 255, 255, 0.1);
       margin: 20px;
@@ -329,9 +316,6 @@
       text-shadow: 0 0 15px #00e0ff;
     }
 
-   
-
-   
     footer {
       background: rgba(0, 0, 0, 0.7);
       text-align: center;
@@ -346,8 +330,6 @@
       .carousel-track { gap: 12px; }
     }
 
-    
-    /* ===== BACKGROUND ===== */
     #space {
       position: fixed;
       top: 0;
@@ -384,33 +366,33 @@
 <body>
   <div id="space"></div>
 
-  <!-- Hamburger icon -->
-  <!-- Hamburger icon -->
-<div class="hamburger" id="hamburger">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
-<!-- Desktop nav -->
-<nav class="desktop-nav">
-  <a href="#home"><b>Home</b></a>
-  <a href="#about"><b>About</b></a>
-  <a href="#skills"><b>Skills</b></a>
-  <a href="#projects"><b>Projects</b></a>
-  <a href="#contact"><b>Contact</b></a>
-</nav>
-
-
-
+  <nav class="desktop-nav">
+    <a href="#home"><b>Home</b></a>
+    <a href="#about"><b>About</b></a>
+    <a href="#skills"><b>Skills</b></a>
+    <a href="#projects"><b>Projects</b></a>
+    <a href="#contact"><b>Contact</b></a>
+  </nav>
 
   <section id="home">
     <div class="top-carousel">
       <div class="carousel-track">
-        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
-        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
-        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
-        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
+        <div class="polaroid"><img src="photo1.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo2.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo3.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo4.jpg" alt=""></div>
+        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="polaroid"><img src="photo1.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo2.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo3.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo4.jpg" alt=""></div>
         <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
       </div>
     </div>
@@ -420,10 +402,16 @@
 
     <div class="bottom-carousel">
       <div class="carousel-track">
-        <div class="polaroid"><img src="photo1.jpg" alt="photo1"></div>
-        <div class="polaroid"><img src="photo2.jpg" alt="photo2"></div>
-        <div class="polaroid"><img src="photo3.jpg" alt="photo3"></div>
-        <div class="polaroid"><img src="photo4.jpg" alt="photo4"></div>
+        <div class="polaroid"><img src="photo1.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo2.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo3.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo4.jpg" alt=""></div>
+        <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="polaroid"><img src="photo1.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo2.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo3.jpg" alt=""></div>
+        <div class="polaroid"><img src="photo4.jpg" alt=""></div>
         <div class="polaroid"><video autoplay loop muted playsinline><source src="video1.mp4" type="video/mp4"></video></div>
       </div>
     </div>
@@ -465,60 +453,46 @@
         <p>Built using Arduino Nano, IR sensors, TB66 motor driver and other required elements.</p>
       </a>
     </div>
-     <div class="project">
-      <a href="AIR.html" class = "project-link">
-        <h2> AIR training</h2>
+    <div class="project">
+      <a href="AIR.html" class="project-link">
+        <h2>AIR training</h2>
         <p>Trainee at AIR</p>
       </a>
     </div>
-
-     <div class="project">
-      <a href="Megatronix.html" class = "project-link">
-        <h2> Megatronix member</h2>
-        <p>Organised Paridhi,the renowned inter college tech fest of east zone as a megatron , member of Megatronix ,the official technical club of MSIT</p>
+    <div class="project">
+      <a href="Megatronix.html" class="project-link">
+        <h2>Megatronix member</h2>
+        <p>Organised Paridhi, the renowned inter college tech fest of east zone as a megatron, member of Megatronix, the official technical club of MSIT</p>
       </a>
     </div>
-
-      <div class="project">
-        <h2> Final year project and research work</h2>
-        <p> UNDER  PROGRESS</p>
-        <p>1. Project and  research work on Performances of adiabatic logic circuits in the presence of interface trapped charges</p>
-        <p>2. Continued research on Radio telegraph noise (RTN)</p>
+    <div class="project">
+      <h2>Final year project and research work</h2>
+      <p>UNDER PROGRESS</p>
+      <p>1. Project and research work on Performances of adiabatic logic circuits in the presence of interface trapped charges</p>
+      <p>2. Continued research on Radio telegraph noise (RTN)</p>
     </div>
   </section>
 
-  <section id ="Hire">
-    <h1> Hire me? Download my resume.</h1>
-    <a href="AdrijaChakraborty_Resume (2).pdf" download class="resume-btn">
-  Download Resume
-</a>
+  <section id="Hire">
+    <h1>Hire me? Download my resume.</h1>
+    <a href="AdrijaChakraborty_Resume (2).pdf" download class="resume-btn">Download Resume</a>
   </section>
-
- 
 
   <section id="contact">
     <h1>Contact</h1>
     <p>📧 <a href="mailto:official.adrijac@gmail.com">official.adrijac@gmail.com</a></p>
     <p>💼 <a href="https://www.linkedin.com/in/adrija-chakraborty-0b186622a?utm_source=share_via&utm_content=profile&utm_medium=member_android">LinkedIn</a></p>
-<section id="contact">
-  <h1>Contact Me</h1>
 
- <div class="gform-container">
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSeYmdIWxCVJKUe9ZJvi0ZCGh48KY0fJjGFAoIsNg4kcoesSKQ/viewform?embedded=true"  
-    width="100%" 
-    height="600" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0"
-  >Loading…</iframe>
-</div>
-
-</section>
-
-
-
-
+    <div class="gform-container">
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeYmdIWxCVJKUe9ZJvi0ZCGh48KY0fJjGFAoIsNg4kcoesSKQ/viewform?embedded=true"
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0"
+      >Loading…</iframe>
+    </div>
   </section>
 
   <nav id="mobileNav" class="mobile-nav">
@@ -526,96 +500,4 @@
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <footer>© 2025 Adrija Chakraborty | Made by Adrija with love 💙</footer>
-
-  <script>
-    // Star background
-    const space = document.getElementById("space");
-    for (let i = 0; i < 200; i++) {
-      const star = document.createElement("div");
-      star.classList.add("star");
-      star.style.top = Math.random() * 100 + "%";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.animationDuration = 2 + Math.random() * 3 + "s";
-      star.style.animationDelay = Math.random() * 5 + "s";
-      space.appendChild(star);
-    }
-
-    // Reveal sections on scroll
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.1 });
-
-    sections.forEach((sec) => observer.observe(sec));
-
-    // Hamburger + Mobile Nav Toggle
-   const hamburger = document.getElementById("hamburger");
-const mobileNav = document.getElementById("mobileNav");
-
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
-  mobileNav.classList.toggle("active");
-});
-
-mobileNav.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    mobileNav.classList.remove("active");
-  });
-});
-
-  </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <a href="#contact
